@@ -4,16 +4,16 @@ const { createBooking, getUserBookings, cancelBooking, getAllBookings } = requir
 
 const router = express.Router();
 
-// ➕ Book a trip
+//  Book a trip
 router.post("/", protect, createBooking);
 
-// 📄 View user bookings
+// View user bookings
 router.get("/mybookings", protect, getUserBookings);
 
-// ❌ Cancel booking
+// Cancel booking
 router.put("/cancel/:id", protect, cancelBooking);
 
-// 📊 Admin view all bookings (optional protect with isAdmin middleware)
+// Admin view all bookings (optional protect with isAdmin middleware)
 router.get("/", protect, getAllBookings);
 
 module.exports = router;

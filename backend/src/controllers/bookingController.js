@@ -1,5 +1,5 @@
 const Booking = require("../models/booking");
-const Package = require("../models/package");
+const Package = require("../models/travelPackage");
 
 // create a booking
 const createBooking = async(req ,res)=>{
@@ -64,7 +64,6 @@ const cancelBooking =async (req,res)=>{
     res.status(500).json({ message: error.message });
   }
 };
-
 
 // admin view all bookings
 const getAllBookings = async (req, res) => {

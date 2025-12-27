@@ -18,7 +18,7 @@ const paymentSchema = new mongoose.Schema(
         },
         method:{
             type:String,
-            enum:["esewa"],
+            enum:["khalti"],
             required:true 
         },
         transactionId: {

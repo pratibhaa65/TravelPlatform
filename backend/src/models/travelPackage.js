@@ -46,4 +46,4 @@ const travelPackageSchema = new mongoose.Schema(
     {timestamps : true}
 );
 
-module.exports = mongoose.model("travelPackage", travelPackageSchema)
+module.exports = mongoose.model("TravelPackage", travelPackageSchema)

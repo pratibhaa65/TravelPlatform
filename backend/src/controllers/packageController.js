@@ -1,9 +1,9 @@
-const travelPackage = require("../models/travelPackage");
+const TravelPackage = require("../models/travelPackage");
 
 // create a travel Travel package (admin)
 const createPackage = async(req ,res )=>{
     try{
-        const newPackage =new travelPackage({
+        const newPackage =new TravelPackage({
             ...req.body,
             createdBy: req.user._id
         });
@@ -20,7 +20,7 @@ const createPackage = async(req ,res )=>{
 // get all travel packages
 const getAllPackages = async(req,res)=>{
     try{
-        const packages = await travelPackage.find();
+        const packages = await TravelPackage.find();
         res.json(packages);
     }catch(error){
         res.status(500).json({message: "Failed to fetch packages"});
@@ -33,21 +33,21 @@ const getAllPackages = async(req,res)=>{
 const updatePackage = async (req, res) => {
   try {
     const packageId = req.params.id;
-    const { name, description, price, duration } = req.body;
+    const { title, description, price, duration } = req.body;
 
     // Find the package
-    const package = await Package.findById(packageId);
+    const package = await TravelPackage.findById(packageId);
     if (!package) {
       return res.status(404).json({ message: "Package not found" });
     }
 
     // Check if logged-in user is the creator
-    if (package.createdBy.toString() !== req.user.id) {
+    if (package.createdBy.toString() !== req.user._id) {
       return res.status(401).json({ message: "Not authorized to update this package" });
     }
 
     // Update 
-    package.name = name || package.name;
+    package.title = title || package.title;
     package.description = description || package.description;
     package.price = price || package.price;
     package.duration = duration || package.duration;
@@ -66,13 +66,13 @@ const deletePackage = async (req, res) => {
   try {
     const packageId = req.params.id;
 
-    const package = await Package.findById(packageId);
+    const package = await TravelPackage.findById(packageId);
     if (!package) {
       return res.status(404).json({ message: "Package not found" });
     }
 
     // Only creator can delete
-    if (package.createdBy.toString() !== req.user.id) {
+    if (package.createdBy.toString() !== req.user._id) {
       return res.status(401).json({ message: "Not authorized to delete this package" });
     }
 
@@ -82,8 +82,6 @@ const deletePackage = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-
 
 module.exports ={
     createPackage,

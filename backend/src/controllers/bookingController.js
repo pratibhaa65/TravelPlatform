@@ -1,5 +1,5 @@
 const Booking = require("../models/booking");
-const Package = require("../models/travelPackage");
+const TravelPackage = require("../models/travelPackage");
 
 // create a booking
 const createBooking = async(req ,res)=>{
@@ -7,7 +7,7 @@ const createBooking = async(req ,res)=>{
         const{packageId , bookingDate ,numberOfPeople}=req.body;
 
         // check if package exists
-        const tourPackage = await Package.findById(packageId);
+        const tourPackage = await TravelPackage.findById(packageId);
         if(!tourPackage){
             return res.status(404).json({message: "Package not found"});
         }
@@ -15,8 +15,8 @@ const createBooking = async(req ,res)=>{
         // calculate totalPrice
         const totalPrice =tourPackage.price * numberOfPeople;
 
-        const booking= new booking({
-            user:req.user.id,
+        const booking= new Booking({
+            user:req.user._id,
             package:packageId,
             bookingDate,
             numberOfPeople,
@@ -35,8 +35,8 @@ const createBooking = async(req ,res)=>{
 // view user booking
 const getUserBookings= async(req,res) =>{
     try{
-        const bookings = await Booking.find({user:req.user.id})
-        .populate("package","name price duration")
+        const bookings = await Booking.find({user:req.user._id})
+        .populate("package","title price duration")
         .populate("user","name email");
         res.json(bookings);
     }
@@ -52,11 +52,11 @@ const cancelBooking =async (req,res)=>{
     if (!booking) return res.status(404).json({ message: "Booking not found" });
 
     // Only user who booked can cancel
-    if (booking.user.toString() !== req.user.id) {
+    if (booking.user.toString() !== req.user._id) {
       return res.status(401).json({ message: "Not authorized to cancel this booking" });
     }
 
-    booking.status = "cancelled";
+    booking.status = "canceled";
     await booking.save();
 
     res.json({ message: "Booking cancelled successfully", booking });
@@ -69,7 +69,7 @@ const cancelBooking =async (req,res)=>{
 const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate("package", "name price duration")
+      .populate("package", "title price duration")
       .populate("user", "name email");
     res.json(bookings);
   } catch (error) {
@@ -82,4 +82,4 @@ module.exports ={
     getUserBookings,
     cancelBooking,
     getAllBookings
-}
+};

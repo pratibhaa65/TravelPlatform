@@ -7,11 +7,11 @@ const router=express.Router();
 // Private(Admin)
 router.post("/",protect,admin, createPackage);
 // Public
-router.get("/",protect,admin, getAllPackages);
+router.get("/", getAllPackages);
 // Protected
-router.put("/:id",protect ,admin ,updatePackage);
+router.put("/:id",protect, admin, updatePackage);
 // Protected
-router.delete("/:id", protect, deletePackage);
+router.delete("/:id", protect, admin, deletePackage);
 
 
 module.exports =router;

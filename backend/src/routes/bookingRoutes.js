@@ -1,6 +1,7 @@
 const express = require("express");
 const { protect } = require("../middleware/authMiddleware");
 const { createBooking, getUserBookings, cancelBooking, getAllBookings } = require("../controllers/bookingController");
+const { admin } = require("../middleware/adminMiddleware");
 
 const router = express.Router();
 
@@ -11,9 +12,9 @@ router.post("/", protect, createBooking);
 router.get("/mybookings", protect, getUserBookings);
 
 // Cancel booking
-router.put("/cancel/:id", protect, cancelBooking);
+router.delete("/cancel/:id", protect, cancelBooking);
 
-// Admin view all bookings (optional protect with isAdmin middleware)
-router.get("/", protect, getAllBookings);
+// Admin view all bookings 
+router.get("/", protect, admin, getAllBookings);
 
 module.exports = router;

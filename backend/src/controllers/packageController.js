@@ -1,31 +1,43 @@
 const TravelPackage = require("../models/travelPackage");
 
-// create a travel Travel package (admin)
-const createPackage = async(req ,res )=>{
-    try{
-        const newPackage =new TravelPackage({
-            ...req.body,
-            createdBy: req.user._id
-        });
-        const savedPackage =await newPackage.save();
-        res.status(201).json(savedPackage);
+// create a travel Travel package 
+const createPackage = async (req, res) => {
+  try {
+    const { title, description, price, duration, location, availableSlots, image } = req.body;
+    if (!title || !description || !price || !duration || !location || !availableSlots) {
+      return res.status(400).json({ message: "All fields are required" });
     }
-   catch (error) {
-  console.error("CREATE PACKAGE ERROR:", error);
-  res.status(500).json({ message: error.message });
-}
+
+    const newPackage = new TravelPackage({
+      title,
+      description,
+      price,  
+      duration,
+      location,
+      availableSlots,
+      image,
+      createdBy: req.user._id
+    });
+    
+    const savedPackage = await newPackage.save();
+    res.status(201).json(savedPackage);
+  }
+  catch (error) {
+    console.error("CREATE PACKAGE ERROR:", error);
+    res.status(500).json({ message: error.message });
+  }
 
 };
 
 // get all travel packages
-const getAllPackages = async(req,res)=>{
-    try{
-        const packages = await TravelPackage.find();
-        res.json(packages);
-    }catch(error){
-        res.status(500).json({message: "Failed to fetch packages"});
+const getAllPackages = async (req, res) => {
+  try {
+    const packages = await TravelPackage.find();
+    res.json(packages);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch packages" });
 
-    }
+  }
 };
 
 
@@ -40,12 +52,11 @@ const updatePackage = async (req, res) => {
     if (!package) {
       return res.status(404).json({ message: "Package not found" });
     }
-
     // Check if logged-in user is the creator
-    if (package.createdBy.toString() !== req.user._id) {
+    if (package.createdBy.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: "Not authorized to update this package" });
-    }
-
+  }
+    
     // Update 
     package.title = title || package.title;
     package.description = description || package.description;
@@ -54,9 +65,8 @@ const updatePackage = async (req, res) => {
 
     const updatedPackage = await package.save();
     res.json(updatedPackage);
-  } 
-  catch (error) 
-  {
+  }
+  catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -72,20 +82,20 @@ const deletePackage = async (req, res) => {
     }
 
     // Only creator can delete
-    if (package.createdBy.toString() !== req.user._id) {
+    if (package.createdBy.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: "Not authorized to delete this package" });
     }
 
-    await package.remove();
+    await TravelPackage.findByIdAndDelete(packageId);
     res.json({ message: "Package deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports ={
-    createPackage,
-    getAllPackages,
-    updatePackage,
-    deletePackage
+module.exports = {
+  createPackage,
+  getAllPackages,
+  updatePackage,
+  deletePackage
 }

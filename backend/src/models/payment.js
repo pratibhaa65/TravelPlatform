@@ -1,27 +1,27 @@
-const mongoose= require("mongoose");
+const mongoose = require("mongoose");
 
 const paymentSchema = new mongoose.Schema(
-    {
-        booking:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Booking",
-            required:true 
-        },
-        user:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User",
-            required:true 
-        },
-        amount:{
-            type:Number,
-            required:true 
-        },
-        method:{
-            type:String,
-            enum:["khalti"],
-            required:true 
-        },
-        transactionId: {
+  {
+    booking: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking",
+      required: true
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+    amount: {
+      type: Number,
+      required: true
+    },
+    method: {
+      type: String,
+      enum: ["khalti"],
+      required: true
+    },
+    transactionId: {
       type: String,
       required: true,
     },
@@ -31,7 +31,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
     },
   },
-  {timestamps:true}
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("Payment",paymentSchema);
+module.exports = mongoose.model("Payment", paymentSchema);

@@ -39,8 +39,6 @@ const registerUser = async (req, res) => {
 // LOGIN USER
 const loginUser = async (req, res) => {
   try {
-      console.log("HEADERS:", req.headers);
-    console.log("BODY:", req.body);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -61,9 +59,9 @@ const loginUser = async (req, res) => {
     });
 
   } catch (error) {
-  console.error("LOGIN ERROR:", error);
-  res.status(500).json({ message: error.message });
-}
+    console.error("LOGIN ERROR:", error);
+    res.status(500).json({ message: error.message });
+  }
 
 };
 

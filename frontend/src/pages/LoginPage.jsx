@@ -8,9 +8,17 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+     if (password.length < 8) {
+    setPasswordError("Password must be at least 8 characters long");
+    return;
+  }
+
+  setPasswordError("");
 
     console.log({ email, password });
   };
@@ -50,21 +58,21 @@ const LoginPage = () => {
             password={password}
             setPassword={setPassword}
             showConfirm={false}     // ❗ important for login
-            passwordError=""
+            passwordError={passwordError}
             className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <div className="h-4"></div>
 
 
-         <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full mb-6 px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select Role</option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full mb-6 px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
 
           <button
             type="submit"
@@ -72,11 +80,16 @@ const LoginPage = () => {
             Login
           </button>
 
-          <Link
-          to="/register"
-          className="text-center block text-sm text-blue-600 mt-4 cursor-pointer hover:underline">
-            Register Now
-          </Link>
+          <p className="text-center text-sm mt-4">
+            No account?{" "}
+            <Link
+              to="/register"
+              className="text-blue-900 cursor-pointer hover:underline"
+            >
+              Register Now
+            </Link>
+          </p>
+
         </form>
       </div>
     </div>

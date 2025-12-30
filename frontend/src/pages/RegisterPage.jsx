@@ -11,17 +11,22 @@ const RegisterPage = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const handleRegister = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
-      return;
-    }
+  if (password.length < 8) {
+    setPasswordError("Password must be at least 8 characters long");
+    return;
+  }
 
-    setPasswordError("");
+  if (confirmPassword && password !== confirmPassword) {
+    setPasswordError("Passwords do not match");
+    return;
+  }
 
-    console.log({ fullName, email, password, role });
-  };
+  setPasswordError("");
+  console.log({ fullName, email, password, role });
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
@@ -81,11 +86,16 @@ const RegisterPage = () => {
               Register
             </button>
 
-            <Link
-              to="/login"
-              className="text-center block text-sm text-blue-600 mt-4 cursor-pointer hover:underline">
-              Login Now
-            </Link>
+            <p className="text-center text-sm mt-4">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-blue-900 cursor-pointer hover:underline"
+              >
+                Login Now
+              </Link>
+            </p>
+
           </form>
         </div>
       </div>

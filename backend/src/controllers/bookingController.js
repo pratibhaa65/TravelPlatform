@@ -2,52 +2,64 @@ const Booking = require("../models/booking");
 const TravelPackage = require("../models/travelPackage");
 
 // create a booking
-const createBooking = async(req ,res)=>{
-    try{
-        const{packageId , bookingDate ,numberOfPeople}=req.body;
+const createBooking = async (req, res) => {
+  try {
+    const { packageId, bookingDate, numberOfPeople } = req.body;
 
-        // check if package exists
-        const tourPackage = await TravelPackage.findById(packageId);
-        if(!tourPackage){
-            return res.status(404).json({message: "Package not found"});
-        }
-
-        // calculate totalPrice
-        const totalPrice =tourPackage.price * numberOfPeople;
-
-        const booking= new Booking({
-            user:req.user._id,
-            package:packageId,
-            bookingDate,
-            numberOfPeople,
-            totalPrice
-        });
-
-        const savedBooking= await booking.save();
-        res.status(201).json(savedBooking);
+    if (!packageId || !bookingDate || !numberOfPeople) {
+      return res.status(400).json({ message: "All fields are required" });
     }
-    catch(error){
-        res.status(500).json({message : error.message})            
+
+    // check if package exists
+    const travelPackage = await TravelPackage.findById(packageId);
+    if (!travelPackage) {
+      return res.status(404).json({ message: "Package not found" });
     }
+
+    if (numberOfPeople > travelPackage.availableSlots) {
+      return res
+        .status(400)
+        .json({ message: `Only ${travelPackage.availableSlots} slot(s) available` });
+    }
+    // calculate totalPrice
+    const totalPrice = travelPackage.price * numberOfPeople;
+
+    const booking = new Booking({
+      user: req.user._id,
+      package: packageId,
+      bookingDate,
+      numberOfPeople,
+      totalPrice
+    });
+
+    travelPackage.availableSlots -= numberOfPeople;
+    await travelPackage.save();
+
+    const savedBooking = await booking.save();
+    res.status(201).json(savedBooking);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message })
+  }
 };
 
 
 // view user booking
-const getUserBookings= async(req,res) =>{
-    try{
-        const bookings = await Booking.find({user:req.user._id})
-        .populate("package","title price duration")
-        .populate("user","name email");
-        res.json(bookings);
-    }
-    catch(error){
-        res.status(500).json({message : error.message});
-    }
+const getUserBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ user: req.user._id })
+      .populate("package", "title price duration")
+      .populate("user", "name email");
+    res.json(bookings);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 // cancel Booking
-const cancelBooking =async (req,res)=>{
-   try {
+const cancelBooking = async (req, res) => {
+  try {
     const booking = await Booking.findById(req.params.id);
     if (!booking) return res.status(404).json({ message: "Booking not found" });
 
@@ -77,9 +89,9 @@ const getAllBookings = async (req, res) => {
   }
 };
 
-module.exports ={
-    createBooking,
-    getUserBookings,
-    cancelBooking,
-    getAllBookings
+module.exports = {
+  createBooking,
+  getUserBookings,
+  cancelBooking,
+  getAllBookings
 };

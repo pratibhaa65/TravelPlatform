@@ -11,9 +11,13 @@ import Packages from "./pages/Packages";
 import AddPackage from "./pages/AddPackage";
 import AddBooking from "./pages/AddBooking";
 import MyBooking from "./pages/MyBooking";
+import PackageCard from "./components/PackageCard";
 
 function App() {
   return (
+  <div>
+     
+   
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -26,8 +30,11 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/user" element={<UserDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        
       </Routes>
+      
     </Router>
+     </div>
   );
 }
 

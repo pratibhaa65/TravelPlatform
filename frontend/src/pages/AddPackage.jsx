@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const AddPackage = () => {
   const [title, setTitle] = useState("");
@@ -7,21 +8,41 @@ const AddPackage = () => {
   const [duration, setDuration] = useState("");
   const [location, setLocation] = useState("");
   const [availableSlots, setAvailableSlots] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
 
-    console.log({
-      title,
-      description,
-      price,
-      duration,
-      location,
-      availableSlots,
-      image,
-    });
+      const res = await axios.post(
+        "http://localhost:8000/api/packages",
+        {
+          title,
+          description,
+          price,
+          duration,
+          location,
+          availableSlots,
+          image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setSuccess("Package added successfully");
+      setError("");
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+      setSuccess("");
+    }
   };
+
 
   return (
     <form
@@ -114,4 +135,5 @@ const AddPackage = () => {
   );
 };
 
-export default AddPackage;
+
+  export default AddPackage;

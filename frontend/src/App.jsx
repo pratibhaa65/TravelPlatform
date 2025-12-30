@@ -8,7 +8,8 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
 import Packages from "./pages/Packages";
-import BookPackage from "./pages/BookPackage";
+import AddPackage from "./pages/AddPackage";
+import AddBooking from "./pages/AddBooking";
 import MyBooking from "./pages/MyBooking";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/packages" element={<Packages />} />
-        <Route path="/book/:id" element={<BookPackage />} />
+        <Route path="/addPackage" element={<AddPackage />} />
+        <Route path="/addBooking" element={<AddBooking />} />
         <Route path="/mybookings" element={<MyBooking />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

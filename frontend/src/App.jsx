@@ -12,6 +12,7 @@ import AddPackage from "./pages/AddPackage";
 import AddBooking from "./pages/AddBooking";
 import MyBooking from "./pages/MyBooking";
 import PackageCard from "./components/PackageCard";
+import PackageList from "./pages/PackageList";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/addPackage" element={<AddPackage />} />
+        <Route path="/" element={<PackageList />} />
         <Route path="/addBooking" element={<AddBooking />} />
         <Route path="/mybookings" element={<MyBooking />} />
         <Route path="/login" element={<LoginPage />} />

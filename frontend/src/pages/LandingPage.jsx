@@ -1,17 +1,22 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Home from "./Home";
+// import Discover from "../pages/Discover";
+// import About from "../pages/About";
+// import Contact from "../pages/Contact";
 
 const LandingPage = () => {
   return (
     <>
       <Header />
-      <div style={{ padding: "50px", textAlign: "center" }}>
-        <h1>Welcome to Travel Platform</h1>
-      </div>
+      <main>
+        <Home />           
+      </main>
       <Footer />
     </>
   );
 };
+
 
 export default LandingPage;

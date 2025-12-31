@@ -1,4 +1,5 @@
 import React from "react";
+import About from "./about";
 import { FaPlaneDeparture, FaMapMarkerAlt, FaGlobe, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
 
 const partners = [
@@ -195,6 +196,9 @@ const Home = () => {
 
         </div>
       </section>
+
+              <About />       
+
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 md:px-16">

@@ -1,8 +1,8 @@
 import React from "react";
-import About from "./about";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import PackageCard from "../components/PackageCard";
 import { FaPlaneDeparture, FaMapMarkerAlt, FaGlobe, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
-
-
 
 const stats = [
   {
@@ -29,6 +29,21 @@ const stats = [
 
 
 const Home = () => {
+   const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8000/api/packages");
+        setPackages(data);
+      } catch (error) {
+        console.error("Error fetching packages:", error);
+      }
+    };
+
+    fetchPackages();
+  }, []);
+
   return (
     <>
       <section
@@ -186,6 +201,19 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section 
+      id="package"
+      className="max-w-7xl mx-auto px-6 py-10">
+      <h1 className="text-3xl font-bold text-center mb-8">Explore Packages</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {packages.length > 0 ? (
+          packages.map((pkg) => <PackageCard key={pkg._id} pkg={pkg} />)
+        ) : (
+          <p className="col-span-3 text-center">No packages available yet.</p>
+        )}
+      </div>
+    </section>
     </>
   );
 };

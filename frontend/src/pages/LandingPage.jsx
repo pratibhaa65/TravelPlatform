@@ -8,7 +8,7 @@ import Partners from "./partners";
 
 const LandingPage = () => {
   return (
-    <>
+    <div className="px-28 ">
       <Header />
       <main>
         <Home />
@@ -16,7 +16,8 @@ const LandingPage = () => {
         <Partners />
       </main>
       <Footer />
-    </>
+      </div>
+  
   );
 };
 

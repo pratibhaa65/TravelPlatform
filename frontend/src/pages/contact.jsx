@@ -26,10 +26,11 @@ const Contact = () => {
   };
 
   return (
-    <>
+    <div className="px-28">
+      <Navbar />
     <section 
-    id="contact" className="bg-blue-50 py-12">
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    id="contact" className="py-12">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-3xl font-semibold text-blue-900 mb-6 text-center">
           Contact Us
@@ -79,7 +80,7 @@ const Contact = () => {
       </div>
     </div>
     </section>
-    </>
+    </div>
   );
 };
 

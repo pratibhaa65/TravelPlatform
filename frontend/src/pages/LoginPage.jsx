@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import PasswordShowHide from "./Passwordshowhide";
 import API from "../services/api";
+import Navbar from "../components/Navbar";
 
 const LoginPage = () => {
 
@@ -44,10 +45,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
+<div className="px-28">
+
+   <Navbar />
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
 
-        {/* Image side */}
         <div className="hidden md:block md:w-1/2">
           <img
             src=" https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
@@ -58,7 +61,6 @@ const LoginPage = () => {
           />
         </div>
 
-        {/* Form side */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-3xl font-semibold text-blue-900 mb-8 text-center">
             Login
@@ -78,7 +80,7 @@ const LoginPage = () => {
               placeholder="Password"
               password={password}
               setPassword={setPassword}
-              showConfirm={false}     // ❗ important for login
+              showConfirm={false}     
               passwordError={passwordError}
               className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -102,7 +104,7 @@ const LoginPage = () => {
             </button>
 
             <p className="text-center text-sm mt-4">
-              No account?{" "}
+              Don't have an account?{" "}
               <Link
                 to="/register"
                 className="text-blue-900 cursor-pointer hover:underline"
@@ -115,7 +117,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-
+  </div>
   );
 };
 

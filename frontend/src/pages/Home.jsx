@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import PackageCard from "../components/PackageCard";
 import { FaPlaneDeparture, FaMapMarkerAlt, FaGlobe, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
@@ -27,9 +28,17 @@ const stats = [
   },
 ];
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
 const Home = () => {
-   const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -44,13 +53,24 @@ const Home = () => {
     fetchPackages();
   }, []);
 
+  const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 350, behavior: "smooth" });
+  };
+
+
   return (
     <>
       <section
         id="home"
-        className="min-h-screen flex items-center bg-white px-6 md:px-16"
+        className="min-h-screen flex py-10 bg-white"
       >
-        <div style={{ marginTop: "10px" }}>
+        <div className=" mx-auto ">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
             <div>
@@ -69,10 +89,13 @@ const Home = () => {
               </p>
 
               <div className="mt-8 flex gap-4">
-                <button className="px-6 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition">
+                <Link
+                  to="/login"
+                  className="px-6 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition">
                   Get Started
-                </button>
-                <button className="px-6 py-3 border border-gray-500 rounded-lg hover:bg-gray-200 transition">
+                </Link>
+
+                <button onClick={() => scrollToSection("about")} className="px-6 py-3 border border-gray-500 rounded-lg hover:bg-gray-200 transition">
                   Learn More
                 </button>
               </div>
@@ -202,18 +225,44 @@ const Home = () => {
         </div>
       </section>
 
-      <section 
-      id="package"
-      className="max-w-7xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-center mb-8">Explore Packages</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {packages.length > 0 ? (
-          packages.map((pkg) => <PackageCard key={pkg._id} pkg={pkg} />)
-        ) : (
-          <p className="col-span-3 text-center">No packages available yet.</p>
-        )}
-      </div>
-    </section>
+      <section
+        id="package"
+        className="max-w-7xl mx-auto px-6 py-12"
+      >
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">Explore Packages</h1>
+
+          <div className="flex items-center gap-3">
+
+
+            <Link
+              to="/packagelist"
+              className="ml-4 px-5 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              View All
+            </Link>
+          </div>
+        </div>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
+        >
+          {packages.length > 0 ? (
+            packages.map((pkg) => (
+              <div
+                key={pkg._id}
+                className="min-w-[300px] max-w-[300px]"
+              >
+                <PackageCard pkg={pkg} />
+              </div>
+            ))
+          ) : (
+            <p>No packages available yet.</p>
+          )}
+        </div>
+      </section>
+
     </>
   );
 };

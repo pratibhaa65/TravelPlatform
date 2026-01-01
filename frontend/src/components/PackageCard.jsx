@@ -5,9 +5,9 @@ const PackageCard = ({ pkg }) => {
   return (
     <div 
     id="package"
-    className="border rounded-lg p-4 shadow hover:shadow-lg transition duration-300">
+    className="border rounded-lg py-4 shadow hover:shadow-lg transition duration-300">
       <img
-        src={pkg.image || "/default-package.jpg"} // fallback image
+        src={pkg.image || "/default-package.jpg"} 
         alt={pkg.name}
         className="w-full h-48 object-cover rounded"
       />

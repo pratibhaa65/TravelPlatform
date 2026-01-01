@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PasswordShowHide from "./Passwordshowhide";
 import { Link } from "react-router-dom";
+import API from "../services/api";
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -10,7 +11,7 @@ const RegisterPage = () => {
   const [role, setRole] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
   e.preventDefault();
 
   if (password.length < 8) {
@@ -23,10 +24,31 @@ const RegisterPage = () => {
     return;
   }
 
-  setPasswordError("");
-  console.log({ fullName, email, password, role });
-};
+  try {
+    const res = await API.post("/users/register", {
+      name: fullName,
+      email,
+      password,
+      role,
+    });
 
+    console.log("REGISTER SUCCESS:", res.data);
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data));
+
+    if (res.data.role === "admin") {
+      window.location.href = "/admin";
+    } else {
+      window.location.href = "/user";
+    }
+
+  } catch (error) {
+    setPasswordError(
+      error.response?.data?.message || "Registration failed"
+    );
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">

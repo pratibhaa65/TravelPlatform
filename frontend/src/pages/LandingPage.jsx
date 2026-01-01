@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Home from "./Home";
+import About from "./about";
+import Partners from "./partners";
+
 // import About from "./about";
 // import Discover from "../pages/Discover";
 // import About from "../pages/About";
@@ -12,7 +15,9 @@ const LandingPage = () => {
     <>
       <Header />
       <main>
-        <Home />  
+        <Home />
+        <About />
+        <Partners />
       </main>
       <Footer />
     </>

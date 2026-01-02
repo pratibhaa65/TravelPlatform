@@ -49,7 +49,7 @@ const LoginPage = () => {
 
    <Navbar />
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full max-w-3xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
 
         <div className="hidden md:block md:w-1/2">
           <img

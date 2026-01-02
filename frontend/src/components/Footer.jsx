@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700 ">
+    <footer className="bg-gray-100 text-gray-300 ">
 
       <section style={{ background: "#fff", padding: "70px 0px" }}>
         <div
@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
       </section>
 
-      <div className="text-center py-4 text-sm">
+      <div className="text-center text-black py-4 text-sm">
         <p>&copy; 2025 TravelApp. All rights reserved.</p>
       </div>
     </footer>

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Home from "./Home";
 import About from "./about";
 import Partners from "./partners";
-
+import Testimonials from "./testimonials";
 
 const LandingPage = () => {
   return (
@@ -14,6 +14,7 @@ const LandingPage = () => {
         <Home />
         <About />
         <Partners />
+        <Testimonials />
       </main>
       <Footer />
       </div>

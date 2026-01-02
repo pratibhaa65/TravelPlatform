@@ -155,9 +155,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
             <div className="relative flex justify-center items-center h-[420px]">

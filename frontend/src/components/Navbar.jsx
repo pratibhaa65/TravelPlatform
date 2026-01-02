@@ -1,17 +1,38 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 import Contact from "../pages/contact";
 
 const Navbar = () => {
 
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -80;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    if (location.pathname !== "/") {
+      navigate("/");
+
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const yOffset = -80;
+          const y =
+            element.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const yOffset = -80;
+        const y =
+          element.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
   };
 
@@ -33,12 +54,12 @@ const Navbar = () => {
             About Us
           </button>
           <Link
-          id="contact"
-          to="/contact"
-          className="hover:text-blue-900"
-        >
-          Contact Us
-        </Link>
+            id="contact"
+            to="/contact"
+            className="hover:text-blue-900"
+          >
+            Contact Us
+          </Link>
         </div>
 
         <div className="flex gap-4">

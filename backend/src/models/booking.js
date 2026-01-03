@@ -1,41 +1,49 @@
 const mongoose = require("mongoose");
 
-const bookingSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema(
+  {
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
+
     package: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "TravelPackage",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TravelPackage",
+      required: true,
     },
+
+    // bookingDate = TRAVEL START DATE
     bookingDate: {
-        type: Date,
-        required: true
+      type: Date,
+      required: [true, "Travel start date is required"],
     },
+
     numberOfPeople: {
-        type: Number,
-        required: true
+      type: Number,
+      required: [true, "Number of people is required"],
+      min: 1,
     },
+
     totalPrice: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
+
     status: {
-        type: String,
-        enum: ["pending", "confirmed", "canceled"],
-        default: "pending"
+      type: String,
+      enum: ["pending", "confirmed", "canceled"],
+      default: "pending",
     },
-    paymentStatus:{
-        type:String,
-        enum:["unpaid","paid"],
-        default:"unpaid"        
+
+    paymentStatus: {
+      type: String,
+      enum: ["unpaid", "paid"],
+      default: "unpaid",
     },
-},
-    { timestamps: true }
+  },
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("Booking", bookingSchema)
-
+module.exports = mongoose.model("Booking", bookingSchema);

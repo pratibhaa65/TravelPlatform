@@ -10,38 +10,42 @@ const createBooking = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // check if package exists
+    // Check if package exists
     const travelPackage = await TravelPackage.findById(packageId);
     if (!travelPackage) {
       return res.status(404).json({ message: "Package not found" });
     }
 
+    // Check available slots
     if (numberOfPeople > travelPackage.availableSlots) {
-      return res
-        .status(400)
-        .json({ message: `Only ${travelPackage.availableSlots} slot(s) available` });
+      return res.status(400).json({
+        message: `Only ${travelPackage.availableSlots} slot(s) available`,
+      });
     }
-    // calculate totalPrice
+
+    // Calculate total price
     const totalPrice = travelPackage.price * numberOfPeople;
 
+    // Create booking (bookingDate = travel start date)
     const booking = new Booking({
       user: req.user._id,
       package: packageId,
       bookingDate,
       numberOfPeople,
-      totalPrice
+      totalPrice,
     });
 
+    // Reduce available slots
     travelPackage.availableSlots -= numberOfPeople;
     await travelPackage.save();
 
     const savedBooking = await booking.save();
     res.status(201).json(savedBooking);
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message })
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 
 // view user booking
@@ -61,21 +65,36 @@ const getUserBookings = async (req, res) => {
 const cancelBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
-    if (!booking) return res.status(404).json({ message: "Booking not found" });
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
 
     // Only user who booked can cancel
     if (booking.user.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: "Not authorized to cancel this booking" });
     }
 
+    // Prevent double cancel
+    if (booking.status === "canceled") {
+      return res.status(400).json({ message: "Booking already canceled" });
+    }
+
+    // Restore slots
+    const travelPackage = await TravelPackage.findById(booking.package);
+    if (travelPackage) {
+      travelPackage.availableSlots += booking.numberOfPeople;
+      await travelPackage.save();
+    }
+
     booking.status = "canceled";
     await booking.save();
 
-    res.json({ message: "Booking cancelled successfully", booking });
+    res.json({ message: "Booking canceled successfully", booking });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // admin view all bookings
 const getAllBookings = async (req, res) => {

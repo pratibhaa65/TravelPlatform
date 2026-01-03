@@ -19,6 +19,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/packages",packageRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/admin", bookingRoutes);
 app.use("/api/payments",paymentRoutes)
 
 // test route

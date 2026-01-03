@@ -11,6 +11,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import AddPackage from "./Admin/pages/AddPackage";
 import EditPackage from "./Admin/pages/EditPackage";
+import AdminBookingList from "./Admin/pages/AdminBookingList";
 
 function App() {
   return (
@@ -26,9 +27,12 @@ function App() {
 
         <Route path="/admindashboard" element={<AdminLayout />}>
           <Route index element={<AdminOverview />} />
+
           <Route path="packages" element={<AdminPackageList />} />
           <Route path="packages/addpackage" element={<AddPackage />} />
           <Route path="/admindashboard/packages/edit/:id" element={<EditPackage />} />
+
+          <Route path="bookings" element={<AdminBookingList />} />
         </Route>
 
       </Routes>

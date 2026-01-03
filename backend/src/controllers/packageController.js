@@ -40,36 +40,61 @@ const getAllPackages = async (req, res) => {
   }
 };
 
+// get a package by ID
+const getPackageById = async (req, res) => {
+  try {
+    const pkg = await TravelPackage.findById(req.params.id);
+    if (!pkg) {
+      return res.status(404).json({ message: "Package not found" });
+    }
+    res.json(pkg);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch package" });
+  }
+};
 
-// Update a package 
 const updatePackage = async (req, res) => {
   try {
     const packageId = req.params.id;
-    const { title, description, price, duration } = req.body;
+    const { title, description, price, duration, location, availableSlots, imageUrl } = req.body;
 
     // Find the package
     const package = await TravelPackage.findById(packageId);
     if (!package) {
       return res.status(404).json({ message: "Package not found" });
     }
+
     // Check if logged-in user is the creator
     if (package.createdBy.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: "Not authorized to update this package" });
-  }
-    
-    // Update 
+    }
+
+    // Update fields
     package.title = title || package.title;
     package.description = description || package.description;
     package.price = price || package.price;
     package.duration = duration || package.duration;
+    package.location = location || package.location;
+    package.availableSlots = availableSlots || package.availableSlots;
+
+    // Handle image: URL or file upload
+    if (imageUrl) {
+      package.image = imageUrl;
+    } else if (req.file) {
+      package.image = `/uploads/${req.file.filename}`;
+    }
 
     const updatedPackage = await package.save();
     res.json(updatedPackage);
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message });
+
+  } catch (error) {
+    console.error("Update package error:", error);
+    res.status(500).json({ message: "Failed to update package" });
   }
 };
+
+module.exports = { updatePackage };
+
 
 // Delete a package 
 const deletePackage = async (req, res) => {
@@ -96,6 +121,7 @@ const deletePackage = async (req, res) => {
 module.exports = {
   createPackage,
   getAllPackages,
+  getPackageById,
   updatePackage,
   deletePackage
 }

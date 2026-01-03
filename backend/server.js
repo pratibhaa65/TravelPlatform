@@ -8,6 +8,7 @@ const bookingRoutes = require("./src/routes/bookingRoutes");
 const paymentRoutes =require("./src/routes/paymentRoutes");
 
 const app = express();
+app.use(express.urlencoded({ extended: true })); 
 
 connectDB();
 

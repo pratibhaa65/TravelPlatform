@@ -1,35 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// Pages
-import LandingPage from "./pages/LandingPage"; 
-import Contact from "./pages/contact";
-import Home from "./pages/Home";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import UserDashboard from "./pages/UserDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
-import Packages from "./pages/Packages";
-import AddPackage from "./pages/AddPackage";
-import AddBooking from "./pages/AddBooking";
-import MyBooking from "./pages/MyBooking";
-import PackageList from "./pages/PackageList";
+// App.jsx
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import AdminLayout from "./Admin/AdminLayout";
+import AdminOverview from "./Admin/pages/AdminOverview";
+import AdminPackageList from "./Admin/pages/AdminPackageList";
+import LandingPage from "./LandingPages/pages/LandingPage";
+import Home from "./LandingPages/pages/Home";
+import Contact from "./LandingPages/pages/Contact";
+import PackageList from "./LandingPages/pages/PackageList";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
+import AddPackage from "./Admin/pages/AddPackage";
+import EditPackage from "./Admin/pages/EditPackage";
 
 function App() {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={<LandingPage />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/packages" element={<Packages />} />
-        <Route path="/packagelist" element={<PackageList />} />
-        <Route path="/addPackage" element={<AddPackage />} />
-        <Route path="/addBooking" element={<AddBooking />} />
-        <Route path="/mybookings" element={<MyBooking />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/packages" element={<PackageList />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/user" element={<UserDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+
+        <Route path="/admindashboard" element={<AdminLayout />}>
+          <Route index element={<AdminOverview />} />
+          <Route path="packages" element={<AdminPackageList />} />
+          <Route path="packages/addpackage" element={<AddPackage />} />
+          <Route path="/admindashboard/packages/edit/:id" element={<EditPackage />} />
+        </Route>
+
       </Routes>
     </Router>
   );

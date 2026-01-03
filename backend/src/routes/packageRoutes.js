@@ -1,17 +1,36 @@
-const express =require("express");
-const { getAllPackages, createPackage, updatePackage, deletePackage } = require("../controllers/packageController");
+const express = require("express");
+const { 
+  getAllPackages, 
+  getPackageById, 
+  createPackage, 
+  updatePackage, 
+  deletePackage 
+} = require("../controllers/packageController");
 const { protect } = require("../middleware/authMiddleware");
 const { admin } = require("../middleware/adminMiddleware");
-const router=express.Router();
+const multer = require("multer");
 
-// Private(Admin)
-router.post("/",protect,admin, createPackage);
-// Public
+const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
+const upload = multer({ storage });
+
+// Admin only - create package
+router.post("/", protect, admin, upload.single("imageFile"), createPackage);
+
+// Get all packages - public
 router.get("/", getAllPackages);
-// Protected
-router.put("/:id",protect, admin, updatePackage);
-// Protected
+
+// Get single package by ID - public
+router.get("/:id", getPackageById);
+
+// Admin only - update package
+router.put("/:id", protect, admin, upload.single("imageFile"), updatePackage);
+
+// Admin only - delete package
 router.delete("/:id", protect, admin, deletePackage);
 
-
-module.exports =router;
+module.exports = router;

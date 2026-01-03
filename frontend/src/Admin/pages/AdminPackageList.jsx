@@ -61,10 +61,13 @@ const AdminPackageList = () => {
         <table className="min-w-full bg-white shadow rounded-lg">
           <thead>
             <tr className="bg-blue-900 text-white">
-              <th className="py-3 px-6 text-left">Image</th>
-              <th className="py-3 px-6 text-left">Title</th>
-              <th className="py-3 px-6 text-left">Price (Rs.)</th>
-              <th className="py-3 px-6 text-left">Actions</th>
+              <th className="py-3 px-4 text-center">Image</th>
+              <th className="py-3 px-4 text-center">Title</th>
+              <th className="py-3 px-4 text-center">Location</th>              
+              <th className="py-3 px-4 text-center">Price (Rs.)</th>
+              <th className="py-3 px-4 text-center">Available Slots</th>
+              <th className="py-3 px-4 text-center">Duration</th>
+              <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -77,18 +80,21 @@ const AdminPackageList = () => {
                     className="w-20 h-14 object-cover rounded"
                   />
                 </td>
-                <td className="py-3 px-6">{pkg.title}</td>
-                <td className="py-3 px-6">{pkg.price}</td>
-                <td className="py-3 px-6 flex gap-2">
+                <td className="py-3 px-4 text-center">{pkg.title}</td>
+                <td className="py-3 px-4 text-center">{pkg.location}</td>
+                <td className="py-3 px-4 text-center">{pkg.price}</td>
+                <td className="py-3 px-4 text-center">{pkg.availableSlots}</td>
+                <td className="py-3 px-4 text-center"> {pkg.duration} </td>
+                <td className="py-3 px-4 flex gap-2 items-center justify-center">
                   <button
-                    className="bg-blue-900 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    className="bg-blue-900 text-white px-3 py-1 rounded hover:bg-blue-700 items-center"
                     onClick={() => navigate(`/admindashboard/packages/edit/${pkg._id}`)}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(pkg._id)}
-                    className="bg-red-900 text-white px-3 py-1 rounded hover:bg-red-500"
+                    className="bg-red-900 text-white px-3 py-1 rounded hover:bg-red-500 items-center"
                   >
                     Delete
                   </button>

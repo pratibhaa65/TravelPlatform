@@ -74,7 +74,6 @@ const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
           <SidebarItem icon={<FaMapMarkedAlt />} label="Packages" to="/admindashboard/packages" collapsed={collapsed} />
           <SidebarItem icon={<FaSuitcase />} label="Bookings" to="/admindashboard/bookings" collapsed={collapsed} />
           <SidebarItem icon={<FaUsers />} label="Users" to="/admindashboard/users" collapsed={collapsed} />
-          <SidebarItem icon={<FaChartLine />} label="Analytics" to="/admindashboard/analytics" collapsed={collapsed} />
         </nav>
 
         {/* Logout */}

@@ -48,7 +48,7 @@ const AddPackage = () => {
         }
       );
 
-      setSuccess("✅ Package added successfully");
+      setSuccess(" Package added successfully");
       setError("");
 
       setTitle("");
@@ -80,13 +80,11 @@ const AddPackage = () => {
 
   return (
     <>
-
-
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto space-y-4 bg-gray-200 p-6 rounded-lg shadow"
       >
-        <h2 className="text-xl font-semibold text-center">Add Package</h2>
+        <h2 className="text-2xl font-semibold text-center">Add Package</h2>
 
         {/* Title */}
         <div>
@@ -199,7 +197,7 @@ const AddPackage = () => {
               type="file"
               accept="image/*"
               onChange={(e) => setImageFile(e.target.files[0])}
-              className="w-full"
+              className="w-full "
             />
           )}
         </div>
@@ -226,6 +224,5 @@ const AddPackage = () => {
     </>
   );
 };
-
 
 export default AddPackage;

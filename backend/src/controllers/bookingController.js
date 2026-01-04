@@ -46,8 +46,6 @@ const createBooking = async (req, res) => {
   }
 };
 
-
-
 // view user booking
 const getUserBookings = async (req, res) => {
   try {
@@ -108,9 +106,11 @@ const getAllBookings = async (req, res) => {
   }
 };
 
+
 module.exports = {
   createBooking,
   getUserBookings,
   cancelBooking,
-  getAllBookings
+  getAllBookings,
+ 
 };

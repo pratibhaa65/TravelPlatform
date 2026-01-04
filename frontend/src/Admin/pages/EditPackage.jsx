@@ -45,53 +45,53 @@ const EditPackage = () => {
             return () => clearTimeout(timer);
         }
     }, [success, error]);
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  try {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("duration", duration);
-    formData.append("location", location);
-    formData.append("availableSlots", availableSlots);
+        try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("price", price);
+            formData.append("duration", duration);
+            formData.append("location", location);
+            formData.append("availableSlots", availableSlots);
 
-    if (imageType === "url") {
-      formData.append("imageUrl", imageUrl);
-    } else if (imageFile) {
-      formData.append("imageFile", imageFile);
-    }
+            if (imageType === "url") {
+                formData.append("imageUrl", imageUrl);
+            } else if (imageFile) {
+                formData.append("imageFile", imageFile);
+            }
 
-    await axios.put(
-      `http://localhost:8000/api/packages/${id}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+            await axios.put(
+                `http://localhost:8000/api/packages/${id}`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
-    setSuccess("Package updated successfully ✅");
-    setError("");
+            setSuccess("Package updated successfully");
+            setError("");
 
-    setTimeout(() => {
-      navigate("/admindashboard/packages");
-    }, 3000);
+            setTimeout(() => {
+                navigate("/admindashboard/packages");
+            }, 3000);
 
-  } catch (err) {
-    console.error(err.response?.data || err.message);
-    setError(err.response?.data?.message || "Failed to update package ❌");
-    setSuccess("");
-  }
-};
+        } catch (err) {
+            console.error(err.response?.data || err.message);
+            setError(err.response?.data?.message || "Failed to update package ❌");
+            setSuccess("");
+        }
+    };
 
     return (
         <div className="max-w-md mx-auto py-10">
             <h2 className="text-2xl font-bold text-center mb-6">Edit Package</h2>
 
-           
+
             <form onSubmit={handleSubmit} className="space-y-4 bg-gray-200 p-6 rounded-lg shadow">
                 {/* Title */}
                 <div>

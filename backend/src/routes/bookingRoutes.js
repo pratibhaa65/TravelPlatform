@@ -3,7 +3,7 @@ const { protect } = require("../middleware/authMiddleware");
 const { createBooking, getUserBookings, cancelBooking, getAllBookings } = require("../controllers/bookingController");
 const { admin } = require("../middleware/adminMiddleware");
 
-const {confirmBooking, adminCancelBooking,  markPaymentPaid} = require("../controllers/adminBookingController");
+const {confirmBooking, adminCancelBooking,  markPaymentPaid ,markRefunded, updateBookingStatus} = require("../controllers/adminBookingController");
 const router = express.Router();
 
 //  Book a trip
@@ -15,10 +15,11 @@ router.get("/mybookings", protect, getUserBookings);
 // Cancel booking
 router.delete("/cancel/:id", protect, cancelBooking);
 
-// Admin  
+// Admin  // Suggested Clean Backend Router
 router.get("/", protect, admin, getAllBookings);
-router.put("/bookings/:id/confirm", protect, admin, confirmBooking);
-router.put("/bookings/:id/cancel", protect, admin, adminCancelBooking);
-router.put("/bookings/:id/pay", protect, admin, markPaymentPaid);
-
+router.put("/:id/confirm", protect, admin, confirmBooking);
+router.put("/:id/cancel", protect, admin, adminCancelBooking);
+router.put("/:id/payment/paid", protect, admin, markPaymentPaid);
+router.put("/:id/payment/refund", protect, admin, markRefunded);
+router.put("/:id/update", protect, admin, updateBookingStatus);
 module.exports = router;

@@ -5,13 +5,12 @@ const AdminOverview = () => {
 
   return (
     <>
-     <div className="bg-[url('/admindash.jpg')] bg-cover bg-center rounded-xl p-8 mb-8 text-white shadow-lg">
-  <h2 className="text-2xl font-bold">Welcome back, Admin</h2>
-  <p className="mt-2 text-sm">
-    Monitor platform activity, manage users and bookings, and track business performance.
-  </p>
-</div>
-
+      <div className="bg-[url('/admindash.jpg')] bg-cover bg-center rounded-xl p-8 mb-8 text-white shadow-lg">
+        <h2 className="text-2xl font-bold">Welcome back, Admin</h2>
+        <p className="mt-2 text-sm">
+          Monitor platform activity, manage users and bookings, and track business performance.
+        </p>
+      </div>
 
       {/* Analytics Card */}
       <div className="mt-8 rounded-xl bg-white p-6 shadow">

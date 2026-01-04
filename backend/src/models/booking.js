@@ -14,7 +14,6 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
 
-    // bookingDate = TRAVEL START DATE
     bookingDate: {
       type: Date,
       required: [true, "Travel start date is required"],

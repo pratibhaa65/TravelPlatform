@@ -1,4 +1,5 @@
 import React from "react";
+import Analytics from "./Analytics";
 
 const AdminOverview = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -12,13 +13,11 @@ const AdminOverview = () => {
         </p>
       </div>
 
-      {/* Analytics Card */}
       <div className="mt-8 rounded-xl bg-white p-6 shadow">
         <h3 className="mb-4 text-lg font-semibold">Analytics Overview</h3>
-        <div className="h-40 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">
-          Chart goes here
-        </div>
+        <Analytics />
       </div>
+
     </>
   );
 };

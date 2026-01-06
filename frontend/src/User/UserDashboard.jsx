@@ -1,11 +1,7 @@
-import React from "react";
+import UserLayout from "./UserLayout";
 
 const UserDashboard = () => {
-  return (
-    <div style={{ padding: "50px", textAlign: "center" }}>
-      <h2>User Dashboard</h2>
-    </div>
-  );
+  return <UserLayout />;
 };
 
 export default UserDashboard;

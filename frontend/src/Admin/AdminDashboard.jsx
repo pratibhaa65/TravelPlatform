@@ -10,11 +10,7 @@ const AdminDashboard = () => {
     <AdminLayout>
       <Routes>
         <Route index element={<AdminOverview />} />
-        {/* <Route path="users" element={<Users />} /> */}
         <Route path="packages" element={<AdminPackageList />} />
-        {/* <Route path="bookings" element={<Bookings />} /> */}
-        {/* <Route path="payments" element={<Payments />} /> */}
-
         <Route path="*" element={<Navigate to="/admindashboard" replace />} />
       </Routes>
     </AdminLayout>

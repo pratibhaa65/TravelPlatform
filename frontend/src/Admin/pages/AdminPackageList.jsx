@@ -41,12 +41,7 @@ const AdminPackageList = () => {
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold">Manage Packages</h2>
         <div className="flex gap-3">
-          {/* <button
-            onClick={() => navigate("cards")}
-            className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          >
-            View as Cards
-          </button> */}
+        
           <button
             onClick={() => navigate("addpackage")}
             className="bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700 transition"

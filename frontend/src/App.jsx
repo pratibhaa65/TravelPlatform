@@ -19,6 +19,7 @@ import UserOverview from "./User/pages/UserOverview";
 import MyBooking from "./User/pages/MyBooking";
 import AddBooking from "./User/pages/AddBooking";
 import UserPackages from "./User/pages/UserPackages";
+import AdminProtectedRoute from "./Admin/components/AdminProtectedRoute";
 
 function App() {
   return (
@@ -33,7 +34,11 @@ function App() {
 
         <Route
           path="/admindashboard"
-          element={<AdminLayout />}
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout />
+            </AdminProtectedRoute>
+          }
         >
           <Route index element={<AdminOverview />} />
           <Route path="packages" element={<AdminPackageList />} />
@@ -61,5 +66,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

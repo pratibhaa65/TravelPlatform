@@ -9,9 +9,9 @@ const About = () => {
                     About Us
                 </h2>
 
-                <div className="flex flex-col  gap-12">
+                <div className="flex flex-col  gap-12 ">
                     <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                        <h3 className="text-2xl  text-gray-900 mb-4">
                             We offer top travel features just for you
                         </h3>
 

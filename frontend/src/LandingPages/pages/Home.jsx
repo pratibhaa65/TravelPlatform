@@ -140,9 +140,9 @@ const Home = () => {
       hover:scale-105 hover:z-50 transition-all duration-300 ease-out cursor-pointer"
                 />
 
-                <div className="absolute top-4 left-1/3 bg-green-500 text-white p-3 rounded-full shadow-lg z-40 animate-bounce">
-                  <FaPlaneDeparture />
-                </div>
+                 <div className="absolute top-4 left-1/3 bg-green-500 text-white p-3 rounded-full shadow-lg z-40 "> 
+                   <FaPlaneDeparture />
+                </div> 
 
                 <div className="absolute bottom-24 right-1/3 bg-blue-900 text-white p-3 rounded-full shadow-lg z-40">
                   <FaMapMarkerAlt />

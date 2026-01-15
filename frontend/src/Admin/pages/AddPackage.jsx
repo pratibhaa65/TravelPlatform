@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AddPackage = () => {
   const [title, setTitle] = useState("");
@@ -220,6 +221,13 @@ const AddPackage = () => {
         >
           Add Package
         </button>
+        <Link
+          to="/admindashboard/packages"
+            className="text-blue-900 py-2 transition text-center justify-center flex hover:bg-blue-50"
+
+        >
+          View Packages
+        </Link>
       </form>
     </>
   );

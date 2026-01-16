@@ -29,7 +29,7 @@ const PackageList = () => {
       </h2>
 
       {/* CARD GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+<div className="flex gap-6 overflow-x-auto pb-4 scroll-smooth">
         {packages.map((pkg) => (
           <div
             key={pkg._id}

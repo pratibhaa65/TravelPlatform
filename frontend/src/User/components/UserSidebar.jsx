@@ -8,24 +8,19 @@ import {
   FaAngleDoubleRight,
 } from "react-icons/fa";
 
-const SidebarItem = ({ icon, label, to, collapsed }) => {
+const SidebarItem = ({ icon, label, to, collapsed, end = false }) => {
   return (
     <NavLink
       to={to}
+      end={end}
       className={({ isActive }) =>
         `flex items-center gap-3 rounded-lg px-4 py-2 transition-colors duration-300
-        ${
-          isActive ||
-          (to !== "/" && window.location.pathname.startsWith(to))
-            ? "bg-white text-red-700"
-            : "hover:bg-white/20"
-        }
+        ${isActive ? "bg-white text-red-700" : "hover:bg-white/20"}
         relative group`
       }
     >
       <span className="text-lg">{icon}</span>
       {!collapsed && <span>{label}</span>}
-
       {collapsed && (
         <span className="absolute left-full ml-2 px-2 py-1 rounded bg-gray-800 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
           {label}
@@ -35,12 +30,12 @@ const SidebarItem = ({ icon, label, to, collapsed }) => {
   );
 };
 
+
 const UserSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
   const navigate = useNavigate();
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-30 md:hidden"
@@ -73,6 +68,7 @@ const UserSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
             label="Dashboard"
             to="/userdashboard"
             collapsed={collapsed}
+            end={true}
           />
 
           <SidebarItem

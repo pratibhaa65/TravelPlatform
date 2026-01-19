@@ -1,30 +1,29 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaMapMarkedAlt,
   FaSuitcase,
   FaUsers,
-  FaChartLine,
   FaSignOutAlt,
   FaAngleDoubleLeft,
   FaAngleDoubleRight
 } from "react-icons/fa";
 
-const SidebarItem = ({ icon, label, to, collapsed }) => {
+const SidebarItem = ({ icon, label, to, collapsed, end = false }) => {
   return (
     <NavLink
       to={to}
+      end={end}
       className={({ isActive }) =>
         `flex items-center gap-3 rounded-lg px-4 py-2 transition-colors duration-300
-         ${isActive || (to !== "/" && window.location.pathname.startsWith(to))
-          ? "bg-white text-red-700"
-          : "hover:bg-white/20"}
-         relative group`
+        ${isActive ? "bg-white text-red-700" : "hover:bg-white/20"}
+        relative group`
       }
     >
       <span className="text-lg">{icon}</span>
       {!collapsed && <span>{label}</span>}
+
       {collapsed && (
         <span className="absolute left-full ml-2 px-2 py-1 rounded bg-gray-800 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
           {label}
@@ -33,16 +32,17 @@ const SidebarItem = ({ icon, label, to, collapsed }) => {
     </NavLink>
   );
 };
-
 const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-30 md:hidden"
@@ -52,9 +52,9 @@ const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
 
       <aside
         className={`fixed top-0 left-0 h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white shadow-xl z-40
-          transition-all duration-300
-          ${collapsed ? "w-20" : "w-64"}
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+        transition-all duration-300
+        ${collapsed ? "w-20" : "w-64"}
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
         {/* Header */}
         <div className="px-4 py-6 flex justify-between items-center">
@@ -62,7 +62,6 @@ const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
           <button
             className="text-white text-xl"
             onClick={() => setCollapsed(!collapsed)}
-            title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {collapsed ? <FaAngleDoubleRight /> : <FaAngleDoubleLeft />}
           </button>
@@ -70,10 +69,34 @@ const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
 
         {/* Menu */}
         <nav className="mt-6 flex flex-col gap-2 px-2">
-          <SidebarItem icon={<FaHome />} label="Dashboard" to="/admindashboard" collapsed={collapsed} />
-          <SidebarItem icon={<FaMapMarkedAlt />} label="Packages" to="/admindashboard/packages" collapsed={collapsed} />
-          <SidebarItem icon={<FaSuitcase />} label="Bookings" to="/admindashboard/bookings" collapsed={collapsed} />
-          <SidebarItem icon={<FaUsers />} label="Users" to="/admindashboard/users" collapsed={collapsed} />
+          <SidebarItem
+            icon={<FaHome />}
+            label="Dashboard"
+            to="/admindashboard"
+            collapsed={collapsed}
+            end={true}
+          />
+
+          <SidebarItem
+            icon={<FaMapMarkedAlt />}
+            label="Packages"
+            to="/admindashboard/packages"
+            collapsed={collapsed}
+          />
+
+          <SidebarItem
+            icon={<FaSuitcase />}
+            label="Bookings"
+            to="/admindashboard/bookings"
+            collapsed={collapsed}
+          />
+
+          <SidebarItem
+            icon={<FaUsers />}
+            label="Users"
+            to="/admindashboard/users"
+            collapsed={collapsed}
+          />
         </nav>
 
         {/* Logout */}

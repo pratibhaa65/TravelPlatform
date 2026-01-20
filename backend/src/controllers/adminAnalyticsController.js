@@ -10,12 +10,20 @@ const getAnalytics = async (req, res) => {
     const totalPackages = await TravelPackage.countDocuments();
 
     const revenueData = await Booking.aggregate([
-      { $match: { paymentStatus: "paid" } },
-      { $group: { _id: null, total: { $sum: "$price" } } }
+      {
+        $match: {
+          status: "confirmed",
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$totalPrice" }
+        }
+      }
     ]);
 
-    const totalRevenue = revenueData[0]?.total || 0;
-
+    const totalRevenue = revenueData[0]?.totalRevenue || 0;
     const paymentStats = await Booking.aggregate([
       { $group: { _id: "$paymentStatus", count: { $sum: 1 } } }
     ]);
@@ -91,15 +99,21 @@ const getPackages = async (req, res) => {
 const getBookingsPerMonth = async (req, res) => {
   try {
     const data = await Booking.aggregate([
-      {
-        $group: {
-          _id: { $month: "$createdAt" },
-          count: { $sum: 1 }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
+  {
+    $match: {
+      createdAt: { $exists: true }
+    }
+  },
+  {
+    $group: {
+      _id: { $month: "$createdAt" },
+      count: { $sum: 1 }
+    }
+  },
+  { $sort: { _id: 1 } }
+]);
 
+  
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const formatted = data.map(item => ({

@@ -36,7 +36,7 @@ const Analytics = () => {
         setStats(statsRes.data);
 
         const bookingsRes = await axios.get(
-          "http://localhost:8000/api/admin/bookings?limit=6",
+          "http://localhost:8000/api/admin/bookings?limit=3",
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -44,7 +44,7 @@ const Analytics = () => {
         setBookings(bookingsRes.data);
 
         const packagesRes = await axios.get(
-          "http://localhost:8000/api/admin/packages?limit=6",
+          "http://localhost:8000/api/admin/packages?limit=3",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPackages(packagesRes.data);
@@ -118,7 +118,7 @@ const Analytics = () => {
           <Card title="Total Users" value={stats.totalUsers} />
           <Card title="Total Admins" value={stats.totalAdmins} />
           <Card title="Total Bookings" value={stats.totalBookings} />
-          <Card title="Total Revenue" value={`₹ ${stats.totalRevenue}`} />
+          <Card title="Total Revenue" value={`Rs. ${stats.totalRevenue}`} />
         </div>
       </div>
 
@@ -130,7 +130,7 @@ const Analytics = () => {
           <h3 className="text-lg font-semibold mb-2">Bookings Over Months</h3>
 
           {lineData.length > 0 && (
-            <div className="flex-1">
+            <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={lineData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -150,7 +150,7 @@ const Analytics = () => {
           <h3 className="text-lg font-semibold mb-2">Booking Status</h3>
 
           {barData.length > 0 && (
-            <div className="flex-1">
+            <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={barData}>
                   <CartesianGrid strokeDasharray="3 3" />

@@ -76,22 +76,31 @@ const UserOverview = () => {
   return (
     <div className="space-y-12 p-6">
 
-      {/* Welcome Banner */}
-      <div className="bg-[url('/userdash.jpg')] bg-cover bg-center rounded-xl p-8 text-white shadow-lg">
-        <h2 className="text-2xl font-bold">
-          Welcome back, {user?.name || "Traveler"} 👋
-        </h2>
-        <p className="mt-2 text-lg text-white/90">
-          Manage your bookings and explore new destinations
-        </p>
+      <div className="relative rounded-xl overflow-hidden mb-8 shadow-xl">
+        <div className="absolute inset-0 bg-[url('/userdash.jpg')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
 
-        <div className="mt-8">
-          <button
-            onClick={() => navigate("/userdashboard/packages")}
-            className="bg-white text-blue-900 px-4 py-2 rounded font-medium hover:bg-gray-100"
-          >
-            Explore Packages →
-          </button>
+        {/* Content */}
+        <div className="relative p-8 md:p-12 text-white">
+          <h2 className="text-3xl font-extrabold tracking-wide">
+            Welcome back,{" "}
+              {user?.name || "Traveler"}
+            👋
+          </h2>
+
+          <p className="mt-3 text-lg text-white/90 max-w-xl">
+            Manage your bookings and explore new destinations with ease.
+          </p>
+
+          <div className="mt-8">
+            <button
+              onClick={() => navigate("/userdashboard/packages")}
+              className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold
+                   hover:bg-gray-100 transition-all duration-300 shadow-md"
+            >
+              Explore Packages →
+            </button>
+          </div>
         </div>
       </div>
 

@@ -6,7 +6,7 @@ import AdminPackageList from "./Admin/pages/AdminPackageList";
 import LandingPage from "./LandingPages/pages/LandingPage";
 import Home from "./LandingPages/pages/Home";
 import Contact from "./LandingPages/pages/Contact";
-import PackageList from "./LandingPages/pages/PackageList";
+import Packages from "./LandingPages/pages/Packages";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import AddPackage from "./Admin/pages/AddPackage";
@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/packages" element={<PackageList />} />
+        <Route path="/packages" element={<Packages />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 

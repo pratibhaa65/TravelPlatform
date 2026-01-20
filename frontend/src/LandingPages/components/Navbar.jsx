@@ -46,7 +46,7 @@ const Navbar = () => {
           <button onClick={() => scrollToSection("home")} className="hover:text-blue-900">
             Home
           </button>
-          <button onClick={() => scrollToSection("package")} className="hover:text-blue-900">
+          <button onClick={() => scrollToSection("packages")} className="hover:text-blue-900">
             Discover
           </button>
           <button onClick={() => scrollToSection("about")} className="hover:text-blue-900">

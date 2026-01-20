@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PackageCard from "../components/PackageCard";
+import PackageDetailsModal from "../components/PackageDetailsModal";
 import { FaPlaneDeparture, FaMapMarkerAlt, FaGlobe, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
 
 const stats = [
@@ -28,18 +29,21 @@ const stats = [
   },
 ];
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -80;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
+const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    const yOffset = -80;
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+};
 
 const Home = () => {
   const [packages, setPackages] = useState([]);
-
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -140,9 +144,9 @@ const Home = () => {
       hover:scale-105 hover:z-50 transition-all duration-300 ease-out cursor-pointer"
                 />
 
-                 <div className="absolute top-4 left-1/3 bg-green-500 text-white p-3 rounded-full shadow-lg z-40 "> 
-                   <FaPlaneDeparture />
-                </div> 
+                <div className="absolute top-4 left-1/3 bg-green-500 text-white p-3 rounded-full shadow-lg z-40 ">
+                  <FaPlaneDeparture />
+                </div>
 
                 <div className="absolute bottom-24 right-1/3 bg-blue-900 text-white p-3 rounded-full shadow-lg z-40">
                   <FaMapMarkerAlt />
@@ -224,42 +228,47 @@ const Home = () => {
         </div>
       </section>
 
-      <section
-        id="package"
-        className="max-w-7xl mx-auto px-6 py-12"
-      >
-        <div className="flex items-center justify-between mb-8">
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Explore Packages</h1>
-
-          <div className="flex items-center gap-3">
-
-
-            <Link
-              to="/packagelist"
-              className="ml-4 px-5 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition"
-            >
-              View All
-            </Link>
-          </div>
+          <Link
+            to="/packages"
+            className="px-5 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-700"
+          >
+            View All
+          </Link>
         </div>
 
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
-        >
-          {packages.length > 0 ? (
-            packages.map((pkg) => (
-              <div
-                key={pkg._id}
-                className="min-w-[300px] max-w-[300px]"
-              >
-                <PackageCard pkg={pkg} />
-              </div>
-            ))
-          ) : (
-            <p>No packages available yet.</p>
-          )}
+        <div className="flex gap-6 overflow-x-auto pb-4 scroll-smooth">
+          {packages.map(pkg => (
+            <div key={pkg._id} className="min-w-[300px]">
+              <PackageCard
+                pkg={pkg}
+                isLoggedIn={isLoggedIn}
+                onView={() => setSelectedPackage(pkg)}
+                onBook={() =>
+                  navigate("/userdashboard/bookings/addbooking", {
+                    state: { selectedPackage: pkg },
+                  })
+                }
+              />
+            </div>
+          ))}
         </div>
+
+        {selectedPackage && (
+          <PackageDetailsModal
+            pkg={selectedPackage}
+            onClose={() => setSelectedPackage(null)}
+            onBook={() =>
+              isLoggedIn
+                ? navigate("/userdashboard/bookings/addbooking", {
+                  state: { selectedPackage },
+                })
+                : navigate("/login")
+            }
+          />
+        )}
       </section>
 
     </>

@@ -11,11 +11,9 @@ const partners = () => {
         { name: "Bus Sewa", logo: "/bussewa.png" },
         { name: "Nepal Airlines", logo: "/nepalairlines.png" },
     ];
-
+    
     return (
         <>
-
-
             <section className="py-16">
                 <div className="max-w-7xl mx-auto ">
                     <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -36,6 +34,6 @@ const partners = () => {
                 </div>
             </section></>
     )
-}
+};
 
 export default partners;

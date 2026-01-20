@@ -1,25 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PackageCard = ({ pkg }) => {
+const PackageCard = ({ pkg, onView, onBook, isLoggedIn }) => {
   return (
-    <div 
-    id="package"
-    className="border rounded-lg py-4 shadow hover:shadow-lg transition duration-300">
+    <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
       <img
-        src={pkg.image || "/default-package.jpg"} 
-        alt={pkg.name}
-        className="w-full h-48 object-cover rounded"
+        src={pkg.image || "https://via.placeholder.com/400x250"}
+        alt={pkg.title}
+        className="w-full h-48 object-cover"
       />
-      <h2 className="text-xl font-bold mt-2">{pkg.name}</h2>
-      <p className="text-gray-600 mt-1">{pkg.description}</p>
-      <p className="font-semibold mt-2">Price: ${pkg.price}</p>
-      <Link
-        to={`/packagelist`} 
-        className="mt-2 inline-block bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Browse
-      </Link>
+
+      <div className="p-4">
+        <h3 className="text-lg font-semibold">{pkg.title}</h3>
+        <p className="text-gray-600 mt-1">Rs. {pkg.price}</p>
+
+        <div className="flex justify-between items-center mt-4">
+          <button
+            onClick={onView}
+            className="text-blue-700 font-medium hover:underline"
+          >
+            View details →
+          </button>
+
+          {isLoggedIn ? (
+            <button
+              onClick={onBook}
+              className="bg-blue-900 text-white px-4 py-1 rounded hover:bg-blue-700"
+            >
+              Book Now
+            </button>
+          ) : (
+            <Link 
+            to="/login" className="bg-green-800 text-white px-4 py-1 rounded hover:bg-green-700">
+            Book Now
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,6 @@ import AdminOverview from "./Admin/pages/AdminOverview";
 import AdminPackageList from "./Admin/pages/AdminPackageList";
 import LandingPage from "./LandingPages/pages/LandingPage";
 import Home from "./LandingPages/pages/Home";
-import Contact from "./LandingPages/pages/Contact";
 import Packages from "./LandingPages/pages/Packages";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
@@ -20,10 +19,14 @@ import MyBooking from "./User/pages/MyBooking";
 import AddBooking from "./User/pages/AddBooking";
 import UserPackages from "./User/pages/UserPackages";
 import AdminProtectedRoute from "./Admin/components/AdminProtectedRoute";
+import { Toaster } from "react-hot-toast";
+import Contact from "./LandingPages/pages/contact";
 
 function App() {
   return (
     <Router>
+
+      <Toaster position="bottom-center" />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />

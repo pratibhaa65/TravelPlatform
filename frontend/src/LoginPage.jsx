@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import PasswordShowHide from "./Passwordshowhide";
 import API from "./services/api";
-import Navbar from "./LandingPages/components/Navbar";
+import  Header from "./LandingPages/components/Header";
 
 const LoginPage = () => {
 
@@ -46,18 +46,15 @@ const LoginPage = () => {
 
   return (
 <div className="px-28">
-
-   <Navbar />
+   < Header />
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row w-full max-w-3xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full max-w-3xl bg-gray-200 rounded-xl shadow-md overflow-hidden">
 
         <div className="hidden md:block md:w-1/2">
           <img
-            src=" https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+            src="logreg.png"
             alt="Travel banner"
             className="w-full h-full object-cover curved-l-xl"
-
-
           />
         </div>
 

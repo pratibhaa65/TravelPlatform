@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const PackageCard = ({ pkg, onView, onBook, isLoggedIn }) => {
+const PackageCard = ({ pkg, onView, onBook }) => {
   return (
     <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
       <img
@@ -22,19 +21,12 @@ const PackageCard = ({ pkg, onView, onBook, isLoggedIn }) => {
             View details →
           </button>
 
-          {isLoggedIn ? (
-            <button
-              onClick={onBook}
-              className="bg-blue-900 text-white px-4 py-1 rounded hover:bg-blue-700"
-            >
-              Book Now
-            </button>
-          ) : (
-            <Link 
-            to="/login" className="bg-green-800 text-white px-4 py-1 rounded hover:bg-green-700">
+          <button
+            onClick={onBook}
+            className="bg-blue-900 text-white px-4 py-1 rounded hover:bg-blue-700"
+          >
             Book Now
-            </Link>
-          )}
+          </button>
         </div>
       </div>
     </div>

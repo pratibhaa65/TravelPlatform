@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
+
 import PackageCard from "../components/PackageCard";
 import PackageDetailsModal from "../components/PackageDetailsModal";
 import { FaPlaneDeparture, FaMapMarkerAlt, FaGlobe, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
@@ -43,7 +45,7 @@ const Home = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const isLoggedIn = Boolean(localStorage.getItem("token"));
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -57,22 +59,19 @@ const Home = () => {
     fetchPackages();
   }, []);
 
-  const scrollRef = useRef(null);
-
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
+  const handleBook = (pkg) => {
+    if (!isLoggedIn) {
+      toast.error("Please login to book this package", { duration: 3000 });
+      return;
+    }
+    navigate("/userdashboard/bookings/addbooking", { state: { selectedPackage: pkg } });
   };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 350, behavior: "smooth" });
-  };
-
 
   return (
     <>
       <section
         id="home"
-        className="min-h-screen flex py-10 bg-white"
+        className="min-h-screen flex py-10 bg-white items-center"
       >
         <div className=" mx-auto ">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -165,7 +164,7 @@ const Home = () => {
 
             <div className="relative flex justify-center items-center h-[420px]">
 
-              <div className="absolute left-8 top-0 w-64 h-96 rounded-full overflow-hidden shadow-xl">
+              <div className="absolute left-8 top-0 w-64 h-96 rounded-full overflow-hidden shadow-xl hover:z-50 transition-all duration-300 ease-out cursor-pointer">
                 <img
                   src="/tour.jpg"
                   alt="Scenery"
@@ -173,7 +172,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="absolute right-8 top-12 bottom-0 w-64 h-96 rounded-full overflow-hidden shadow-2xl border-8 border-white">
+              <div className="absolute right-8 top-12 bottom-0 w-64 h-96 rounded-full overflow-hidden shadow-2xl border-8 border-white hover:z-50 transition-all duration-300 ease-out cursor-pointer">
                 <img
                   src="/tour2.jpg"
                   alt="Adventure"
@@ -228,8 +227,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex justify-between items-center mb-8">
+      <section
+        id="packages"
+        className="max-w-7xl mx-auto px-6 py-12">
+        <div
+          className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">Explore Packages</h1>
           <Link
             to="/packages"
@@ -244,13 +246,8 @@ const Home = () => {
             <div key={pkg._id} className="min-w-[300px]">
               <PackageCard
                 pkg={pkg}
-                isLoggedIn={isLoggedIn}
                 onView={() => setSelectedPackage(pkg)}
-                onBook={() =>
-                  navigate("/userdashboard/bookings/addbooking", {
-                    state: { selectedPackage: pkg },
-                  })
-                }
+                onBook={() => handleBook(pkg)}
               />
             </div>
           ))}
@@ -260,13 +257,7 @@ const Home = () => {
           <PackageDetailsModal
             pkg={selectedPackage}
             onClose={() => setSelectedPackage(null)}
-            onBook={() =>
-              isLoggedIn
-                ? navigate("/userdashboard/bookings/addbooking", {
-                  state: { selectedPackage },
-                })
-                : navigate("/login")
-            }
+            onBook={() => bookPackage(selectedPackage)} // use centralized function
           />
         )}
       </section>

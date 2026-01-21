@@ -30,6 +30,41 @@ const Testimonials = () => {
       location: "Birgunj, Nepal",
       photo: "https://i.pravatar.cc/150?img=22",
     },
+    {
+      message:
+        "DeshTrip made our family vacation stress-free. Everything from hotels to transport was well managed.",
+      name: "Nirmala Gurung",
+      location: "Dharan, Nepal",
+      photo: "https://img.freepik.com/free-vector/young-woman-with-brown-hair_90220-2570.jpg"
+    },
+    {
+      message:
+        "The package details were transparent and there were no hidden charges. Truly reliable service.",
+      name: "Suresh Thapa",
+      location: "Butwal, Nepal",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkg5z9XWkPZb7v4l2cJ3zjB6jGx-0R9sOa8A&s"
+    },
+    {
+      message:
+        "Customer support was responsive even late at night. Felt very secure booking through DeshTrip.",
+      name: "Anita Poudel",
+      location: "Bharatpur, Nepal",
+      photo: "https://img.freepik.com/free-vector/woman-with-black-hair-blue-shirt_90220-2979.jpg"
+    },
+    {
+      message:
+        "Perfect choice for solo travelers. The itinerary was flexible and well-organized.",
+      name: "Rohit Bhandari",
+      location: "Hetauda, Nepal",
+      photo: "https://img.freepik.com/free-vector/man-avatar-profile-round-icon_24640-14044.jpg"
+    },
+    {
+      message:
+        "Loved how simple the booking process was. DeshTrip truly understands travelers’ needs.",
+      name: "Sunita Chaudhary",
+      location: "Nepalgunj, Nepal",
+      photo: "https://img.freepik.com/free-vector/woman-profile-cartoon_18591-58480.jpg"
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,8 +106,8 @@ const Testimonials = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-3xl mx-auto px-6 text-center overflow-hidden">
- <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-         What our travelers say
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+          What our travelers say
         </h2>
         <div
           className="flex transition-transform duration-700 ease-in-out"
@@ -110,11 +145,10 @@ const Testimonials = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2.5 h-2.5 rounded-full transition ${
-                currentIndex === index
+              className={`w-2.5 h-2.5 rounded-full transition ${currentIndex === index
                   ? "bg-green-500"
                   : "bg-gray-300"
-              }`}
+                }`}
             />
           ))}
         </div>

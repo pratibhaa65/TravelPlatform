@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PasswordShowHide from "./Passwordshowhide";
 import { Link } from "react-router-dom";
 import API from "./services/api";
-import Navbar from "./LandingPages/components/Navbar";
+import Header from "./LandingPages/components/Header";
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -53,7 +53,7 @@ const RegisterPage = () => {
 
   return (
     <div className="px-28">
-      <Navbar />
+      <Header />
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
         {/* Image side */}

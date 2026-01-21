@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import PasswordShowHide from "./Passwordshowhide";
 import API from "./services/api";
-import Navbar from "./LandingPages/components/Navbar";
+import Header from "./LandingPages/components/Header";
 
 const LoginPage = () => {
 
@@ -47,7 +47,7 @@ const LoginPage = () => {
   return (
 <div className="px-28">
 
-   <Navbar />
+   <Header />
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="flex flex-col md:flex-row w-full max-w-3xl bg-gray-300 rounded-xl shadow-md overflow-hidden">
 

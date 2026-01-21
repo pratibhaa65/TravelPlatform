@@ -20,9 +20,7 @@ const Footer = () => {
               confidence.
             </p>
 
-
           </div>
-
           <div>
             <h4 className="text-blue-900 font-bold">FOLLOW US</h4>
             <div className="flex gap-4 mt-2 text-black">

@@ -32,18 +32,23 @@ const stats = [
 const scrollToSection = (id) => {
   const element = document.getElementById(id);
   if (element) {
-    const yOffset = -80;
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const yOffset = -100; 
+    const y =
+      element.getBoundingClientRect().top +
+      window.pageYOffset +
+      yOffset;
+
     window.scrollTo({ top: y, behavior: "smooth" });
   }
 };
+
 
 const Home = () => {
   const [packages, setPackages] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const isLoggedIn = Boolean(localStorage.getItem("token"));
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -59,21 +64,13 @@ const Home = () => {
 
   const scrollRef = useRef(null);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 350, behavior: "smooth" });
-  };
-
-
   return (
     <>
       <section
         id="home"
-        className="min-h-screen flex py-10 bg-white"
+        className="min-h-screen flex pt-28 py-10 bg-white"
       >
+
         <div className=" mx-auto ">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -228,7 +225,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-12">
+      <section
+        id="package"
+        className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Explore Packages</h1>
           <Link
@@ -270,7 +269,6 @@ const Home = () => {
           />
         )}
       </section>
-
     </>
   );
 };

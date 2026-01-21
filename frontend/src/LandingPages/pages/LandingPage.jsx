@@ -17,10 +17,8 @@ const LandingPage = () => {
         <Testimonials />
       </main>
       <Footer />
-      </div>
-  
+    </div>
   );
 };
-
 
 export default LandingPage;

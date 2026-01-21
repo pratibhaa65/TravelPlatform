@@ -7,28 +7,63 @@ const Testimonials = () => {
         "Planning my trips has never been this easy. The destinations, pricing, and overall experience are simply amazing.",
       name: "Ramesh Adhikari",
       location: "Pokhara, Nepal",
-      photo: "https://i.pravatar.cc/150?img=11",
+      photo: "https://c8.alamy.com/zooms/9/abf223b338c74a21954c2c09afeebf8a/pdycc8.jpg"
     },
     {
       message:
         "Booking was smooth and secure. The DESHTRIP team supported us throughout our Kathmandu tour.",
       name: "Sita Karki",
       location: "Kathmandu, Nepal",
-      photo: "https://i.pravatar.cc/150?img=47",
+      photo: "https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
       message:
         "Our Chitwan jungle safari was perfectly planned. Highly recommended for hassle-free travel.",
       name: "Aayush Shrestha",
       location: "Lalitpur, Nepal",
-      photo: "https://i.pravatar.cc/150?img=32",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQe_gpGOqmoNujHVHn7Jfo2dObCoTRPRgKA&s"
     },
     {
       message:
         "Affordable packages and excellent service. Our Lumbini visit was peaceful and memorable.",
       name: "Bikash Yadav",
       location: "Birgunj, Nepal",
-      photo: "https://i.pravatar.cc/150?img=22",
+      photo: "https://www.shutterstock.com/image-vector/male-avatar-icon-unknown-anonymous-260nw-2206319795.jpg"
+    },
+    {
+      message:
+        "DeshTrip made our family vacation stress-free. Everything from hotels to transport was well managed.",
+      name: "Nirmala Gurung",
+      location: "Dharan, Nepal",
+      photo: "https://img.freepik.com/premium-vector/people-saving-money_24908-51550.jpg?semt=ais_hybrid&w=740&q=80"
+    },
+    {
+      message:
+        "The package details were transparent and there were no hidden charges. Truly reliable service.",
+      name: "Suresh Thapa",
+      location: "Butwal, Nepal",
+      photo: "https://thumbs.dreamstime.com/b/profile-anonymous-face-icon-gray-silhouette-person-male-businessman-profile-default-avatar-photo-placeholder-isolated-white-107003824.jpg"
+    },
+    {
+      message:
+        "Customer support was responsive even late at night. Felt very secure booking through DeshTrip.",
+      name: "Anita Poudel",
+      location: "Bharatpur, Nepal",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQJN1FJhj2PjM5Sw196yPX2G6dkvaTwwJ0Ow&s"
+    },
+    {
+      message:
+        "Perfect choice for solo travelers. The itinerary was flexible and well-organized.",
+      name: "Rohit Bhandari",
+      location: "Hetauda, Nepal",
+      photo: "https://img.freepik.com/free-vector/man-avatar-profile-round-icon_24640-14044.jpg"
+    },
+    {
+      message:
+        "Loved how simple the booking process was. DeshTrip truly understands travelers’ needs.",
+      name: "Sunita Chaudhary",
+      location: "Nepalgunj, Nepal",
+      photo: "https://png.pngtree.com/png-clipart/20220612/original/pngtree-female-face-avatar-in-circle-png-image_7965937.png"
     },
   ];
 
@@ -42,7 +77,7 @@ const Testimonials = () => {
       setCurrentIndex((prev) =>
         prev === testimonials.length - 1 ? 0 : prev + 1
       );
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [testimonials.length]);
@@ -71,8 +106,8 @@ const Testimonials = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-3xl mx-auto px-6 text-center overflow-hidden">
- <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-         What our travelers say
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+          What our travelers say
         </h2>
         <div
           className="flex transition-transform duration-700 ease-in-out"
@@ -110,11 +145,10 @@ const Testimonials = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2.5 h-2.5 rounded-full transition ${
-                currentIndex === index
-                  ? "bg-green-500"
-                  : "bg-gray-300"
-              }`}
+              className={`w-2.5 h-2.5 rounded-full transition ${currentIndex === index
+                ? "bg-green-500"
+                : "bg-gray-300"
+                }`}
             />
           ))}
         </div>

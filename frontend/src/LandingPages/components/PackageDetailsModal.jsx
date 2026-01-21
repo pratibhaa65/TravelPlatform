@@ -10,7 +10,6 @@ const PackageDetailsModal = ({ pkg, onClose, onBook }) => {
         className="bg-white rounded-xl w-full max-w-2xl p-6 relative"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close */}
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-xl text-gray-500 hover:text-black"
@@ -18,20 +17,15 @@ const PackageDetailsModal = ({ pkg, onClose, onBook }) => {
           ✕
         </button>
 
-        {/* Image */}
         <img
           src={pkg.image || "https://via.placeholder.com/600x300"}
           alt={pkg.title}
           className="w-full h-60 object-cover rounded-lg"
         />
 
-        {/* Title */}
         <h2 className="text-2xl font-bold mt-4">{pkg.title}</h2>
-
-        {/* Description */}
         <p className="text-gray-600 mt-2">{pkg.description}</p>
 
-        {/* Info */}
         <div className="mt-4 space-y-2">
           <p>
             <strong>Price:</strong> Rs. {pkg.price}
@@ -65,11 +59,10 @@ const PackageDetailsModal = ({ pkg, onClose, onBook }) => {
           <button
             onClick={onBook}
             disabled={pkg.availableSlots === 0}
-            className={`px-6 py-2 rounded text-white ${
-              pkg.availableSlots === 0
+            className={`px-6 py-2 rounded text-white ${pkg.availableSlots === 0
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-blue-900 hover:bg-blue-700"
-            }`}
+              }`}
           >
             Book Now
           </button>

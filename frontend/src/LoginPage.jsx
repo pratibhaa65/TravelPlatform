@@ -47,8 +47,8 @@ const LoginPage = () => {
   return (
 <div className="px-28">
    < Header />
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row w-full max-w-3xl bg-gray-200 rounded-xl shadow-md overflow-hidden">
+    <div className="min-h-screen flex items-center md:items-center justify-center px-4 py-8">
+      <div className="flex flex-col md:flex-row w-full md:max-w-3xl bg-gray-100 rounded-xl shadow-md overflow-hidden">
 
         <div className="hidden md:block md:w-1/2">
           <img
@@ -58,7 +58,7 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="w-screen md:w-1/2 p-8">
+        <div className="w-full md:w-1/2 p-8">
           <h2 className="text-4xl font-semibold text-blue-900 mb-8 text-center">
             Login
           </h2>

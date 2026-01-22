@@ -83,13 +83,14 @@ const UserOverview = () => {
         <div className="relative p-8 md:p-12 text-white">
           <h2 className="text-3xl font-extrabold tracking-wide">
             Welcome back,{" "}
-              {user?.name || "Traveler"}
+            {user?.name || "Traveler"}
             👋
           </h2>
 
           <p className="mt-3 text-lg text-white/100 max-w-xl">
             Manage your bookings and explore new destinations with ease.
           </p>
+
 
           <div className="mt-8">
             <button
@@ -101,6 +102,8 @@ const UserOverview = () => {
             </button>
           </div>
         </div>
+        <div className="absolute top-6 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"></div>
+
       </div>
 
       {/* Bookings + Stats */}

@@ -55,13 +55,13 @@ const RegisterPage = () => {
     <div className="px-28">
       < Header />
     <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-xl shadow-md overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-100 rounded-xl shadow-md overflow-hidden">
         {/* Image side */}
         <div className="hidden md:block md:w-1/2">
           <img
             src="logreg.png"
             alt="Travel banner"
-            className="w-full h-full object-cover curved-l-xl"
+            className="w-full h-full object-cover curved-l-xl opacity"
           />
         </div>
 

@@ -35,7 +35,7 @@ const Header = () => {
   }, [location, targetSection]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white">
+    <header className="sticky top-0 z-50 w-full border-b bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <Link to="/" className="text-2xl font-bold text-blue-900">
           DESHTRIP

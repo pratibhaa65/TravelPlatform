@@ -104,7 +104,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t py-4 text-center bg-gray-100 text-gray-600 text-sm">
+      <div className="border-t py-4 text-center bg-gray-50 text-gray-600 text-sm">
         © 2025 DESHTRIP. All rights reserved.
       </div>
     </footer>

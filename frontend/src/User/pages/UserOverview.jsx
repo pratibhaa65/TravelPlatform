@@ -76,8 +76,8 @@ const UserOverview = () => {
   return (
     <div className="space-y-12 p-6 bg-white">
       <div className="relative rounded-xl overflow-hidden mb-8 shadow-xl">
-        <div className="absolute inset-0 bg-[url('/userdash.jpg')] bg-cover bg-center"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-[url('/dash.png')] opacity-80 bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/40 to-transparent"></div>
 
         {/* Content */}
         <div className="relative p-8 md:p-12 text-white">
@@ -87,7 +87,7 @@ const UserOverview = () => {
             👋
           </h2>
 
-          <p className="mt-3 text-lg text-white/90 max-w-xl">
+          <p className="mt-3 text-lg text-white/100 max-w-xl">
             Manage your bookings and explore new destinations with ease.
           </p>
 
@@ -138,7 +138,7 @@ const UserOverview = () => {
                   </tr>
                 ) : (
                   recentBookings.map((b) => (
-                    <tr key={b._id} className="border-b bg-gray-100 hover:bg-white">
+                    <tr key={b._id} className="border-b bg-gray-50 hover:bg-white">
                       <td className="py-2 px-4">
                         {b.package?.title || "No package"}
                       </td>
@@ -165,7 +165,7 @@ const UserOverview = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="lg:col-span-3 space-y-4 bg-gray-100">
+        <div className="lg:col-span-3 space-y-4 bg-gray-50">
           <StatCard icon={<FaSuitcase />} title="Total Bookings" value={stats.totalBookings} />
           <StatCard icon={<FaCalendarCheck />} title="Upcoming Trips" value={stats.upcomingTrips} />
           <StatCard icon={<FaMoneyBillWave />} title="Total Spent" value={`Rs. ${stats.totalSpent}`} />

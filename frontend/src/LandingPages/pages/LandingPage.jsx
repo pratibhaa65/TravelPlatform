@@ -8,7 +8,7 @@ import Testimonials from "./testimonials";
 
 const LandingPage = () => {
   return (
-    <div className="px-28 ">
+    <div className="w-full">
       <Header />
       <main>
         <Home />

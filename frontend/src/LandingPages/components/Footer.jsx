@@ -1,71 +1,111 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-gray-100 text-gray-300 ">
+    <footer className="bg-gray-50 border-t">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-12">
 
-      <section style={{ background: "#fff", padding: "70px 0px" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
-            gap: "50px",
-          }}
-        >
-          <div>
-            <h2 className="text-blue-900 font-bold">DESHTRIP</h2>
-            <p className="text-black">
-              Your trusted travel companion for discovering beautiful destinations,
-              planning memorable journeys, and booking experiences with ease and
-              confidence.
-            </p>
+        {/* Brand */}
+        <div className="space-y-4">
+          <h2 className="text-blue-900 text-xl font-bold">DESHTRIP</h2>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Your trusted travel companion for discovering beautiful destinations,
+            planning memorable journeys, and booking experiences with ease.
+          </p>
+        </div>
 
-          </div>
-          <div>
-            <h4 className="text-blue-900 font-bold">FOLLOW US</h4>
-            <div className="flex gap-4 mt-2 text-black">
-              <p><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src="/fb.jpg" alt="Facebook" className="w-6 h-6" />
-              </a>Facebook</p>
-              <p><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <img src="/twitter.png" alt="Twitter" className="w-6 h-6" />
-              </a>Twitter</p>
-              <p><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src="/insta.jpg" alt="Instagram" className="w-6 h-6" />
-              </a>Instagram</p>
-              <p><a href="https://telegram.com" target="_blank" rel="noopener noreferrer">
-                <img src="/telegram.png" alt="Telegram" className="w-6 h-6" />
-              </a>Telegram</p>
-            </div>
-          </div>
-
-
-          <div>
-            <h4 className="text-blue-900 font-bold">CONTACT</h4>
-            <div className="text-black">
-              <p>Why DESHTRIP?</p>
-              <p>Partner with us</p>
-              <p>FAQ’s</p>
-              <p>Blog</p>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-blue-900 font-bold">MEET US</h4>
-            <div className="text-black">
-
-              <div className="text-black">
-                <p>+977-9800000001</p>
-                <p>info@deshtrip.com</p>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </div>
+        {/* Follow Us */}
+        <div className="space-y-4 pr-4">
+          <h4 className="text-blue-900 font-bold uppercase tracking-wide">
+            Follow Us
+          </h4>
+          <div className="flex gap-5">
+            {[
+              { name: "Facebook", img: "/fb.jpg", link: "https://facebook.com" },
+              { name: "Twitter", img: "/twitter.png", link: "https://twitter.com" },
+              { name: "Instagram", img: "/insta.jpg", link: "https://instagram.com" },
+              { name: "Telegram", img: "/telegram.png", link: "https://telegram.com" },
+            ].map((item) => (
+              <a
+                key={item.name}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center text-xs text-gray-600 hover:text-blue-600 transition"
+              >
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-9 h-9 mb-1 hover:scale-110 transition"
+                />
+                {item.name}
+              </a>
+            ))}
           </div>
         </div>
-      </section>
 
-      <div className="text-center text-gray-500 py-4 text-sm">
-        <p>&copy; 2025 TravelApp. All rights reserved.</p>
+        {/* Legal */}
+        <div className="space-y-4 pl-6 md:pl-10">
+          <h4 className="text-blue-900 font-semibold uppercase tracking-wide">
+            Legal
+          </h4>
+
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li className="hover:text-blue-600 cursor-pointer">
+              <Link to="/terms">Terms & Conditions</Link>
+            </li>
+            <li className="hover:text-blue-600 cursor-pointer">
+              <Link to="/privacy">Privacy Policy</Link>
+            </li>
+            <li className="hover:text-blue-600 cursor-pointer">
+              <Link to="/cookies">Cookie Policy</Link>
+            </li>
+            <li className="hover:text-blue-600 cursor-pointer">
+              <Link to="/refund-policy">Refund & Cancellation</Link>
+            </li>
+            <li className="hover:text-blue-600 cursor-pointer">
+              <Link to="/disclaimer">Disclaimer</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Resources */}
+        <div className="space-y-4  pl-8">
+          <h4 className="text-blue-900 font-bold uppercase tracking-wide">
+            Resources
+          </h4>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li className="hover:text-blue-600 cursor-pointer">Why DESHTRIP?</li>
+            <li className="hover:text-blue-600 cursor-pointer">Partner with Us</li>
+            <li className="hover:text-blue-600 cursor-pointer">FAQs</li>
+            <li className="hover:text-blue-600 cursor-pointer">Blog</li>
+          </ul>
+        </div>
+
+        {/* Meet Us */}
+        <div className="space-y-4">
+          <h4 className="text-blue-900 font-bold uppercase tracking-wide">
+            Meet Us
+          </h4>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li>📞 +977-9800000001</li>
+            <li>✉️ info@deshtrip.com</li>
+            <li>📍 Kathmandu, Nepal</li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t py-4 text-center bg-gray-100 text-gray-600 text-sm">
+        © 2025 DESHTRIP. All rights reserved.
       </div>
     </footer>
   );

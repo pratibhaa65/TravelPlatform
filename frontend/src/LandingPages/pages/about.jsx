@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaCalendarAlt, FaTicketAlt, FaHeadset, FaGlobeAsia, FaU
 const About = () => {
     return (
         <section id="about" className="py-20 bg-white">
-            <div className="max-w-7xl mx-auto ">
+            <div className="max-w-7xl mx-auto px-6">
                 <h2 className=" text-center text-4xl font-bold text-gray-900 mb-12">
                     About Us
                 </h2>

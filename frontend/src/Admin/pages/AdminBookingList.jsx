@@ -123,7 +123,6 @@ const updateBookingField = async (id, field, value) => {
   }
 };
 
-
   if (loading) {
     return <p className="text-center py-10">Loading bookings...</p>;
   }
@@ -131,9 +130,8 @@ const updateBookingField = async (id, field, value) => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold mb-6">Manage Bookings</h2>
-
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-gray-200 shadow rounded-lg">
+        <table className="min-w-full bg-gray-100 shadow rounded-lg">
           <thead>
             <tr className="bg-blue-900 text-white">
               <th className="py-3 px-4 text-center">User</th>
@@ -150,7 +148,7 @@ const updateBookingField = async (id, field, value) => {
 
           <tbody>
             {bookings.map((booking) => (
-              <tr key={booking._id} className="border-b hover:bg-gray-50">
+              <tr key={booking._id} className="border-b bg-gray-100 hover:bg-white">
                 <td className="py-3 px-4 text-center">
                   <div className="font-medium">{booking.user?.name}</div>
                   <div className="text-sm text-gray-500">

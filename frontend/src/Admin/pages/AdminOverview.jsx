@@ -14,7 +14,9 @@ const AdminOverview = () => {
         {/* Content */}
         <div className="relative p-12 text-white">
           <h2 className="text-3xl font-extrabold tracking-wide">
-            Welcome back, Admin👋
+             Welcome back,{" "}
+              {user?.name || "Admin"}
+            👋
           </h2>
           <p className="mt-3 text-sm max-w-xl text-gray-200">
             Monitor platform activity, manage users and bookings, and track business performance.
@@ -22,7 +24,7 @@ const AdminOverview = () => {
         </div>
       </div>
       
-      <div className="mt-8 rounded-xl bg-white p-6 shadow">
+      <div className="mt-8 rounded-xl bg-gray-50 p-6 shadow">
         <h3 className="mb-4 text-lg font-semibold">Analytics Overview</h3>
         <Analytics />
       </div>

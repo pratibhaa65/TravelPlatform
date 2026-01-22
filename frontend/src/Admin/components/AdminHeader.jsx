@@ -7,7 +7,7 @@ const AdminHeader = ({ setSidebarOpen }) => {
   const user = JSON.parse(localStorage.getItem("user")) || { name: "Admin", email: "admin@example.com" };
 
   return (
-    <header className="flex items-center justify-between bg-white px-6 py-4 shadow-sm w-full">
+    <header className="flex items-center justify-between bg-gray-100 px-6 py-4 shadow-sm w-full">
       
       <div className="flex items-center gap-4">
         <button

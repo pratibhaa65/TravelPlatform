@@ -21,7 +21,7 @@ const AdminUsersList = () => {
         <div className="mb-12">
             <h2 className="text-3xl font-bold mb-4">{title}</h2>
 
-            <table className="w-full max-w-4xl table-auto bg-white shadow-lg rounded-xl overflow-hidden">
+            <table className="w-full max-w-4xl table-auto bg-gray-100 hover:bg-white shadow-lg rounded-xl overflow-hidden">
                 <thead className="bg-blue-900 text-white">
                     <tr>
                         <th className="py-3 px-4 text-left">Name</th>
@@ -32,7 +32,7 @@ const AdminUsersList = () => {
 
                 <tbody>
                     {data.map((user) => (
-                        <tr key={user._id} className="border-b hover:bg-gray-50">
+                        <tr key={user._id} className="border-b bg-gray-100 hover:bg-white">
                             <td className="py-3 px-4">{user.name}</td>
                             <td className="py-3 px-4">{user.email}</td>
                             <td className="py-3 px-4 text-center">

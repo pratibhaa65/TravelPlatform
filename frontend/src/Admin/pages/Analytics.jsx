@@ -171,10 +171,9 @@ const Analytics = () => {
         {/* Recent Bookings */}
         <div className="bg-white rounded-xl shadow p-4">
           <h3 className="text-lg font-semibold mb-4">Recent Bookings</h3>
-
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-200 rounded-lg">
-              <thead className="bg-gray-100 text-sm text-gray-700">
+              <thead className="bg-blue-900 text-sm text-white">
                 <tr>
                   <th className="px-4 py-3 text-left">User</th>
                   <th className="px-4 py-3 text-left">Package</th>
@@ -203,7 +202,7 @@ const Analytics = () => {
 
           <button
             onClick={() => navigate("/admindashboard/bookings")}
-            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="mt-4 bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             View All Bookings
           </button>
@@ -215,7 +214,7 @@ const Analytics = () => {
 
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-200 rounded-lg">
-              <thead className="bg-gray-100 text-sm text-gray-700">
+              <thead className="bg-blue-900 text-sm text-white">
                 <tr>
                   <th className="px-4 py-3 text-left">Title</th>
                   <th className="px-4 py-3 text-left">Price</th>
@@ -236,16 +235,12 @@ const Analytics = () => {
 
           <button
             onClick={() => navigate("/admindashboard/packages")}
-            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="mt-4 bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             View All Packages
           </button>
         </div>
-
       </div>
-
-
-
     </div>
   );
 };

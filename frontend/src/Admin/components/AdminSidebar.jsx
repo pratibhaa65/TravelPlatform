@@ -5,7 +5,7 @@ import {
   FaMapMarkedAlt,
   FaSuitcase,
   FaUsers,
-  FaSignOutAlt,
+  FaCog,
   FaAngleDoubleLeft,
   FaAngleDoubleRight
 } from "react-icons/fa";
@@ -99,16 +99,16 @@ const AdminSidebar = ({ collapsed, setCollapsed, isOpen, setIsOpen }) => {
           />
         </nav>
 
-        {/* Logout */}
-        <div className="absolute bottom-6 w-full px-2">
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 rounded-lg bg-white/20 px-4 py-2 hover:bg-white/30 transition-colors w-full justify-center"
-          >
-            <FaSignOutAlt />
-            {!collapsed && <span>Logout</span>}
-          </button>
-        </div>
+        {/* Settings button */}
+                <div className="absolute bottom-6 w-full px-2">
+                  <button
+                    onClick={() => navigate(" ")}
+                    className="flex items-center gap-3 rounded-lg bg-white/20 px-4 py-2 hover:bg-white/30 transition-colors w-full justify-center"
+                  >
+                    <FaCog />
+                    {!collapsed && <span>Settings</span>}
+                  </button>
+                </div>
       </aside>
     </>
   );

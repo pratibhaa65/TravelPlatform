@@ -66,7 +66,7 @@ const AdminPackageList = () => {
           </thead>
           <tbody>
             {packages.map((pkg) => (
-              <tr key={pkg._id} className="border-b hover:bg-gray-50 transition">
+              <tr key={pkg._id} className="border-b bg-gray-100 hover:bg-white transition">
                 <td className="py-3 px-6">
                   <img
                     src={pkg.image || "https://via.placeholder.com/100"}

@@ -83,7 +83,7 @@ const AddPackage = () => {
     <>
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto space-y-4 bg-gray-200 p-6 rounded-lg shadow"
+        className="max-w-md mx-auto space-y-4 bg-gray-100 p-6 rounded-lg shadow"
       >
         <h2 className="text-2xl font-semibold text-center">Add Package</h2>
 

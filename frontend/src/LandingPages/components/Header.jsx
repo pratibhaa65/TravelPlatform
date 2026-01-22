@@ -1,11 +1,10 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-const Navbar = () => {
+const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [targetSection, setTargetSection] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
@@ -14,7 +13,6 @@ const Navbar = () => {
     } else {
       scrollNow(id);
     }
-    setMenuOpen(false); 
   };
 
   const scrollNow = (id) => {
@@ -22,7 +20,9 @@ const Navbar = () => {
     if (element) {
       const yOffset = -80;
       const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        element.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -76,4 +76,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

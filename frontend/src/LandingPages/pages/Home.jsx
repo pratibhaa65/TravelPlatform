@@ -34,11 +34,16 @@ const stats = [
 const scrollToSection = (id) => {
   const element = document.getElementById(id);
   if (element) {
-    const yOffset = -80;
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const yOffset = -100; 
+    const y =
+      element.getBoundingClientRect().top +
+      window.pageYOffset +
+      yOffset;
+
     window.scrollTo({ top: y, behavior: "smooth" });
   }
 };
+
 
 const Home = () => {
   const [packages, setPackages] = useState([]);
@@ -73,6 +78,7 @@ const Home = () => {
         id="home"
         className="min-h-screen flex py-10 bg-white items-center"
       >
+
         <div className=" mx-auto ">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -257,11 +263,10 @@ const Home = () => {
           <PackageDetailsModal
             pkg={selectedPackage}
             onClose={() => setSelectedPackage(null)}
-            onBook={() => bookPackage(selectedPackage)} // use centralized function
+            onBook={() => handleBook(selectedPackage)} // use centralized function
           />
         )}
       </section>
-
     </>
   );
 };

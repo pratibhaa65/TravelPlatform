@@ -58,8 +58,8 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-semibold text-blue-900 mb-8 text-center">
+        <div className="w-screen md:w-1/2 p-8">
+          <h2 className="text-4xl font-semibold text-blue-900 mb-8 text-center">
             Login
           </h2>
 
@@ -96,7 +96,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+              className="w-full bg-blue-800 text-white py-2 rounded-md hover:bg-blue-700 transition">
               Login
             </button>
 

@@ -1,89 +1,98 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const Testimonials = () => {
-  const testimonials = [
-    {
-      message:
-        "Planning my trips has never been this easy. The destinations, pricing, and overall experience are simply amazing.",
-      name: "Ramesh Adhikari",
-      location: "Pokhara, Nepal",
-      photo: "https://i.pravatar.cc/150?img=11",
-    },
-    {
-      message:
-        "Booking was smooth and secure. The DESHTRIP team supported us throughout our Kathmandu tour.",
-      name: "Sita Karki",
-      location: "Kathmandu, Nepal",
-      photo: "https://i.pravatar.cc/150?img=47",
-    },
-    {
-      message:
-        "Our Chitwan jungle safari was perfectly planned. Highly recommended for hassle-free travel.",
-      name: "Aayush Shrestha",
-      location: "Lalitpur, Nepal",
-      photo: "https://i.pravatar.cc/150?img=32",
-    },
-    {
-      message:
-        "Affordable packages and excellent service. Our Lumbini visit was peaceful and memorable.",
-      name: "Bikash Yadav",
-      location: "Birgunj, Nepal",
-      photo: "https://i.pravatar.cc/150?img=22",
-    },
-    {
-      message:
-        "DeshTrip made our family vacation stress-free. Everything from hotels to transport was well managed.",
-      name: "Nirmala Gurung",
-      location: "Dharan, Nepal",
-      photo: "https://img.freepik.com/free-vector/young-woman-with-brown-hair_90220-2570.jpg"
-    },
-    {
-      message:
-        "The package details were transparent and there were no hidden charges. Truly reliable service.",
-      name: "Suresh Thapa",
-      location: "Butwal, Nepal",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkg5z9XWkPZb7v4l2cJ3zjB6jGx-0R9sOa8A&s"
-    },
-    {
-      message:
-        "Customer support was responsive even late at night. Felt very secure booking through DeshTrip.",
-      name: "Anita Poudel",
-      location: "Bharatpur, Nepal",
-      photo: "https://img.freepik.com/free-vector/woman-with-black-hair-blue-shirt_90220-2979.jpg"
-    },
-    {
-      message:
-        "Perfect choice for solo travelers. The itinerary was flexible and well-organized.",
-      name: "Rohit Bhandari",
-      location: "Hetauda, Nepal",
-      photo: "https://img.freepik.com/free-vector/man-avatar-profile-round-icon_24640-14044.jpg"
-    },
-    {
-      message:
-        "Loved how simple the booking process was. DeshTrip truly understands travelers’ needs.",
-      name: "Sunita Chaudhary",
-      location: "Nepalgunj, Nepal",
-      photo: "https://img.freepik.com/free-vector/woman-profile-cartoon_18591-58480.jpg"
-    },
-  ];
+const testimonials = [
+  {
+    message:
+      "Planning my trips has never been this easy. The destinations, pricing, and overall experience are simply amazing.",
+    name: "Ramesh Adhikari",
+    location: "Pokhara, Nepal",
+    photo: "https://c8.alamy.com/zooms/9/abf223b338c74a21954c2c09afeebf8a/pdycc8.jpg",
+  },
+  {
+    message:
+      "Booking was smooth and secure. The DESHTRIP team supported us throughout our Kathmandu tour.",
+    name: "Sita Karki",
+    location: "Kathmandu, Nepal",
+    photo: "https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg",
+  },
+  {
+    message:
+      "Our Chitwan jungle safari was perfectly planned. Highly recommended for hassle-free travel.",
+    name: "Aayush Shrestha",
+    location: "Lalitpur, Nepal",
+    photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQe_gpGOqmoNujHVHn7Jfo2dObCoTRPRgKA&s",
+  },
+  {
+    message:
+      "Affordable packages and excellent service. Our Lumbini visit was peaceful and memorable.",
+    name: "Bikash Yadav",
+    location: "Birgunj, Nepal",
+    photo: "https://www.shutterstock.com/image-vector/male-avatar-icon-unknown-anonymous-260nw-2206319795.jpg",
+  },
+  {
+    message:
+      "The trekking package was well organized and budget-friendly. I loved how easy everything was to manage.",
+    name: "Suresh Thapa",
+    location: "Gorkha, Nepal",
+    photo: "https://www.shutterstock.com/image-vector/male-avatar-icon-unknown-anonymous-260nw-2206319795.jpg",
+  },
+  {
+    message:
+      "From booking to return, everything was smooth. DeshTrip really understands travelers’ needs.",
+    name: "Pooja Shrestha",
+    location: "Bhaktapur, Nepal",
+    photo: "https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg",
+  },
+  {
+    message:
+      "Our Mustang trip was unforgettable. The itinerary and hotel choices were perfect.",
+    name: "Rajiv Bhandari",
+    location: "Butwal, Nepal",
+    photo: "https://www.shutterstock.com/image-vector/male-avatar-icon-unknown-anonymous-260nw-2206319795.jpg",
+  },
+  {
+    message:
+      "Best travel platform in Nepal. Clear pricing, no hidden charges, and great destinations.",
+    name: "Manoj Chaudhary",
+    location: "Nepalgunj, Nepal",
+    photo: "https://www.shutterstock.com/image-vector/male-avatar-icon-unknown-anonymous-260nw-2206319795.jpg",
+  },
+  {
+    message:
+      "Our girls’ trip to Pokhara was perfectly planned. Hotels, transport, everything was spot on.",
+    name: "Rekha Pandey",
+    location: "Dhangadhi, Nepal",
+    photo: "https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg",
+  },
+];
 
+const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const startX = useRef(0);
   const isDragging = useRef(false);
+  const intervalRef = useRef(null);
 
-  // Auto-scroll
   useEffect(() => {
-    const interval = setInterval(() => {
+    startAutoScroll();
+    return stopAutoScroll;
+  }, []);
+
+  const startAutoScroll = () => {
+    stopAutoScroll();
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) =>
         prev === testimonials.length - 1 ? 0 : prev + 1
       );
-    }, 3000);
+    }, 4000);
+  };
 
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+  const stopAutoScroll = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
 
-  // Swipe handlers
+  // Touch handlers
   const handleTouchStart = (e) => {
+    stopAutoScroll();
     startX.current = e.touches[0].clientX;
     isDragging.current = true;
   };
@@ -94,21 +103,25 @@ const Testimonials = () => {
     const endX = e.changedTouches[0].clientX;
     const diff = startX.current - endX;
 
-    if (diff > 50 && currentIndex < testimonials.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else if (diff < -50 && currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+    if (diff > 50) {
+      setCurrentIndex((prev) =>
+        prev === testimonials.length - 1 ? prev : prev + 1
+      );
+    } else if (diff < -50) {
+      setCurrentIndex((prev) => (prev === 0 ? prev : prev - 1));
     }
 
     isDragging.current = false;
+    startAutoScroll();
   };
 
   return (
     <section className="py-20 bg-white">
       <div className="max-w-3xl mx-auto px-6 text-center overflow-hidden">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+        <h2 className="text-3xl font-bold text-gray-900 mb-16">
           What our travelers say
         </h2>
+
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -116,10 +129,7 @@ const Testimonials = () => {
           onTouchEnd={handleTouchEnd}
         >
           {testimonials.map((item, index) => (
-            <div
-              key={index}
-              className="min-w-full flex flex-col items-center"
-            >
+            <div key={index} className="min-w-full flex flex-col items-center">
               <img
                 src={item.photo}
                 alt={item.name}
@@ -140,6 +150,7 @@ const Testimonials = () => {
           ))}
         </div>
 
+        {/* Dots */}
         <div className="flex justify-center gap-3 mt-8">
           {testimonials.map((_, index) => (
             <button

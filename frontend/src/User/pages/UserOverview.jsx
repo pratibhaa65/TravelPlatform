@@ -74,8 +74,7 @@ const UserOverview = () => {
   }, [token]);
 
   return (
-    <div className="space-y-12 p-6">
-
+    <div className="space-y-12 p-6 bg-white">
       <div className="relative rounded-xl overflow-hidden mb-8 shadow-xl">
         <div className="absolute inset-0 bg-[url('/userdash.jpg')] bg-cover bg-center"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
@@ -95,7 +94,7 @@ const UserOverview = () => {
           <div className="mt-8">
             <button
               onClick={() => navigate("/userdashboard/packages")}
-              className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold
+              className="bg-gray-50 text-blue-900 px-6 py-3 rounded-lg font-semibold
                    hover:bg-gray-100 transition-all duration-300 shadow-md"
             >
               Explore Packages →
@@ -113,7 +112,7 @@ const UserOverview = () => {
             <h3 className="text-xl font-semibold">Recent Bookings</h3>
             <Link
               to="/userdashboard/bookings/mybookings"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-blue-700 hover:underline"
             >
               View all
             </Link>
@@ -139,7 +138,7 @@ const UserOverview = () => {
                   </tr>
                 ) : (
                   recentBookings.map((b) => (
-                    <tr key={b._id} className="border-b hover:bg-gray-50">
+                    <tr key={b._id} className="border-b bg-gray-100 hover:bg-white">
                       <td className="py-2 px-4">
                         {b.package?.title || "No package"}
                       </td>
@@ -166,7 +165,7 @@ const UserOverview = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="lg:col-span-3 space-y-4 bg-gray-100">
           <StatCard icon={<FaSuitcase />} title="Total Bookings" value={stats.totalBookings} />
           <StatCard icon={<FaCalendarCheck />} title="Upcoming Trips" value={stats.upcomingTrips} />
           <StatCard icon={<FaMoneyBillWave />} title="Total Spent" value={`Rs. ${stats.totalSpent}`} />

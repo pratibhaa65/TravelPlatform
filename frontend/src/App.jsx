@@ -25,8 +25,8 @@ import Contact from "./LandingPages/pages/contact";
 function App() {
   return (
     <Router>
+      <Toaster position="top-center" />
 
-      <Toaster position="bottom-center" />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />

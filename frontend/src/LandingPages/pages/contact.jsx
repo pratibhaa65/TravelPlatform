@@ -17,7 +17,6 @@ const Contact = () => {
     console.log({ name, email, message });
 
     setSuccess(true);
-
     setName("");
     setEmail("");
     setMessage("");
@@ -36,6 +35,11 @@ const Contact = () => {
               Contact Us
             </h2>
 
+            {success && (
+              <p className="mb-4 text-green-600 text-center font-medium">
+                Message sent successfully!
+              </p>
+            )}
             {success && (
               <p className="mb-4 text-green-600 text-center font-medium">
                 Message sent successfully!
@@ -61,14 +65,14 @@ const Contact = () => {
                 className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
 
-              <textarea
-                placeholder="Your Message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows="4"
-                required
-                className="w-full mb-6 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+                  <textarea
+                    placeholder="Your Message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows="4"
+                    required
+                    className="w-full mb-6 px-4 py-2 border rounded-md"
+                  />
 
               <button
                 type="submit"

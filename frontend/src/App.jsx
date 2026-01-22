@@ -10,8 +10,8 @@ function App() {
       <Toaster position="top-center" />
       <Routes>
         <Route path="/*" element={<PublicRoutes />} />
-        <Route path="/admindashboard/*" element={<AdminRoutes />} />
         <Route path="/userdashboard/*" element={<UserRoutes />} />
+        <Route path="/admindashboard/*" element={<AdminRoutes />} />
       </Routes>
     </Router>
   );

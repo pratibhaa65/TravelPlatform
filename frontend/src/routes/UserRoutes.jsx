@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "../User/components/ProtectedRoutes";
+import UserProtectedRoute from "./UserProtectedRoute";
 import UserDashboard from "../User/UserDashboard";
 import UserOverview from "../User/pages/UserOverview";
 import MyBooking from "../User/pages/MyBooking";
@@ -8,7 +8,7 @@ import UserPackages from "../User/pages/UserPackages";
 
 const UserRoutes = () => {
   return (
-    <ProtectedRoute>
+    <UserProtectedRoute>
       <Routes>
         <Route element={<UserDashboard />}>
           <Route index element={<UserOverview />} />
@@ -17,7 +17,7 @@ const UserRoutes = () => {
           <Route path="packages" element={<UserPackages />} />
         </Route>
       </Routes>
-    </ProtectedRoute>
+    </UserProtectedRoute>
   );
 };
 

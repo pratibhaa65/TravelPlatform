@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import AdminProtectedRoute from "./AdminProtectedRoute";
 import AdminLayout from "../Admin/AdminLayout";
-import AdminProtectedRoute from "../Admin/components/AdminProtectedRoute";
 import AdminOverview from "../Admin/pages/AdminOverview";
 import AdminPackageList from "../Admin/pages/AdminPackageList";
 import AddPackage from "../Admin/pages/AddPackage";

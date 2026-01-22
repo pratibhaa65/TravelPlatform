@@ -2,28 +2,26 @@ import React, { useState } from "react";
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { useEffect, useRef } from "react";
 
-  const UserDropdown = ({ user, onLogout }) => {
+const UserDropdown = ({ user, onLogout }) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target)
-        ) {
-          setOpen(false);
-        }
-      };
-        document.addEventListener("mousedown", handleClickOutside);
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
     return () =>
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Dropdown Trigger */}
       <div
         className="flex items-center gap-2 cursor-pointer"
         onClick={() => setOpen(!open)}

@@ -19,6 +19,11 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!email) {
+      setPasswordError("Email is required");
+      return;
+    }
+
     if (password.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
@@ -31,18 +36,18 @@ const LoginPage = () => {
       const res = await axios.post("http://localhost:8000/api/users/login", {
         email,
         password,
+        role
       });
-
 
       console.log("LOGIN SUCCESS:", res.data);
 
+      if (res.data.user) {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+      }
+
       login(res.data.token, res.data.role);
 
-      if (res.data.role === "admin") {
-        navigate("/admindashboard");
-      } else {
-        navigate("/userdashboard");
-      }
+      navigate(res.data.role === "admin" ? "/admindashboard" : "/userdashboard");
 
     } catch (error) {
       console.error("Login failed:", error);

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
-import { useEffect, useRef } from "react";
 
 const UserDropdown = ({ user, onLogout }) => {
   const [open, setOpen] = useState(false);
@@ -8,17 +7,17 @@ const UserDropdown = ({ user, onLogout }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Safe fallback if user is null
+  const username = user?.name || "User";
+  const email = user?.email || "";
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -27,7 +26,7 @@ const UserDropdown = ({ user, onLogout }) => {
         onClick={() => setOpen(!open)}
       >
         <FaUserCircle className="text-2xl text-gray-600 hover:text-red-800" />
-        <span className="text-gray-700 font-medium">{user.name}</span>
+        <span className="text-gray-700 font-medium">{username}</span>
       </div>
 
       {/* Dropdown Menu */}
@@ -35,8 +34,8 @@ const UserDropdown = ({ user, onLogout }) => {
         <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 z-50">
           <div className="flex flex-col items-center p-4">
             <FaUserCircle className="text-4xl text-gray-600 mb-2" />
-            <p className="text-gray-800 font-semibold">{user.name}</p>
-            <p className="text-gray-500 text-sm">{user.email}</p>
+            <p className="text-gray-800 font-semibold">{username}</p>
+            {email && <p className="text-gray-500 text-sm">{email}</p>}
           </div>
           <hr />
           <button
@@ -53,5 +52,3 @@ const UserDropdown = ({ user, onLogout }) => {
 };
 
 export default UserDropdown;
-
-

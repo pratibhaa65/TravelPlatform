@@ -8,16 +8,34 @@ import UserPackages from "../User/pages/UserPackages";
 
 const UserRoutes = () => {
   return (
-    <UserProtectedRoute>
-      <Routes>
-        <Route element={<UserDashboard />}>
-          <Route index element={<UserOverview />} />
-          <Route path="bookings/mybookings" element={<MyBooking />} />
-          <Route path="bookings/addbooking" element={<AddBooking />} />
-          <Route path="packages" element={<UserPackages />} />
-        </Route>
-      </Routes>
-    </UserProtectedRoute>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          <UserProtectedRoute>
+            <UserDashboard />
+          </UserProtectedRoute>
+        }
+      >
+        <Route index element={<UserOverview />} />
+
+        <Route path="bookings/mybookings"
+          element={
+            <MyBooking />
+          }
+        />
+        <Route path="bookings/addbooking"
+          element={
+            <AddBooking />
+          }
+        />
+        <Route path="packages"
+          element={
+            <UserPackages />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
 

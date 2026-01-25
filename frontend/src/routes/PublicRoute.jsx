@@ -5,12 +5,14 @@ const PublicRoute = ({ children }) => {
   const { auth } = useAuth();
 
   if (auth.isAuthenticated) {
-    return auth.role === "admin"
-      ? <Navigate to="/admindashboard" />
-      : <Navigate to="/userdashboard" />;
+    return auth.role === "admin" ? (
+      <Navigate to="/admindashboard" replace />
+    ) : (
+      <Navigate to="/userdashboard" replace />
+    );
   }
 
-  return children;
+  return children; 
 };
 
 export default PublicRoute;

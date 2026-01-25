@@ -10,19 +10,46 @@ import AdminUsersList from "../Admin/pages/AdminUserList";
 
 const AdminRoutes = () => {
   return (
-    <AdminProtectedRoute>
-      <Routes>
-        <Route element={<AdminLayout />}>
-          <Route index element={<AdminOverview />} />
-          <Route path="packages" element={<AdminPackageList />} />
-          <Route path="packages/addpackage" element={<AddPackage />} />
-          <Route path="packages/edit/:id" element={<EditPackage />} />
-          <Route path="bookings" element={<AdminBookingList />} />
-          <Route path="users" element={<AdminUsersList />} />
-        </Route>
-      </Routes>
-    </AdminProtectedRoute>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          <AdminProtectedRoute>
+            <AdminLayout />
+          </AdminProtectedRoute>
+        }
+      >
+        <Route index element={<AdminOverview />} />
+
+        <Route path="packages"
+          element={
+            <AdminPackageList />
+          }
+        />
+        <Route path="packages/addpackage"
+          element={
+            <AddPackage />
+          }
+        />
+        <Route path="packages/edit/:id"
+          element={
+            <EditPackage />
+          }
+        />
+        <Route path="bookings"
+          element={
+            <AdminBookingList />
+          }
+        />
+        <Route path="users"
+          element={
+            <AdminUsersList />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
 
 export default AdminRoutes;
+

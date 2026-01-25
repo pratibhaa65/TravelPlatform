@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSuitcase, FaCalendarCheck, FaMoneyBillWave } from "react-icons/fa";
 import PackageDetailsModal from "../components/PackageDetailsModal";
+import { useAuth } from "../../utils/authContext";
 
 const StatCard = ({ icon, title, value }) => (
   <div className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 flex items-center gap-4">
@@ -29,9 +30,12 @@ const StatusBadge = ({ status }) => {
 };
 
 const UserOverview = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { auth } = useAuth();
+  const user = auth.user;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  console.log("Logged in user:", user);
+
 
   const [stats, setStats] = useState({
     totalBookings: 0,

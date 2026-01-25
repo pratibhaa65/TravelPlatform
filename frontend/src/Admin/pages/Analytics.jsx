@@ -182,7 +182,7 @@ const Analytics = () => {
               </thead>
               <tbody className="text-sm">
                 {bookings.map((b) => (
-                  <tr key={b._id} className="border-t hover:bg-gray-50">
+                  <tr key={b._id} className="border-t bg-gray-50 hover:bg-white">
                     <td className="px-4 py-3 font-medium">{b.userName}</td>
                     <td className="px-4 py-3">{b.packageName}</td>
                     <td className="px-4 py-3">
@@ -223,7 +223,7 @@ const Analytics = () => {
               </thead>
               <tbody className="text-sm">
                 {packages.map((p) => (
-                  <tr key={p._id} className="border-t hover:bg-gray-50">
+                  <tr key={p._id} className="border-t bg-gray-50 hover:bg-white">
                     <td className="px-4 py-3 font-medium">{p.title}</td>
                     <td className="px-4 py-3">Rs.{p.price}</td>
                     <td className="px-4 py-3">{p.duration}</td>

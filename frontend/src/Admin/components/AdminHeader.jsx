@@ -1,11 +1,11 @@
 import React from "react";
 import { FaBell, FaBars } from "react-icons/fa";
-import { logout } from "../../utils/auth";
 import UserDropdown from "../../UserDropdown";
+import { useAuth } from "../../utils/authContext";
 
 const AdminHeader = ({ setSidebarOpen }) => {
-  const userJSON = localStorage.getItem("user");
-  const user = userJSON && userJSON !== "undefined" ? JSON.parse(userJSON) : null;
+  const { auth } = useAuth();
+  const user = auth.user;
 
   return (
     <header className="flex items-center justify-between bg-gray-100 px-6 py-4 shadow-sm w-full">
@@ -24,7 +24,7 @@ const AdminHeader = ({ setSidebarOpen }) => {
 
       <div className="flex items-center gap-6">
         <FaBell className="text-gray-600 text-xl cursor-pointer hover:text-red-800 transition" />
-        <UserDropdown user={user} onLogout={logout} />
+        <UserDropdown />
       </div>
     </header>
   );

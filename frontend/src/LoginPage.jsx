@@ -16,48 +16,49 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    if (!email) {
-      setPasswordError("Email is required");
-      return;
-    }
+  if (!email) {
+    setPasswordError("Email is required");
+    return;
+  }
 
-    if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters long");
-      return;
-    }
+  if (password.length < 8) {
+    setPasswordError("Password must be at least 8 characters long");
+    return;
+  }
 
-    setLoading(true);
-    setPasswordError("");
+  setLoading(true);
+  setPasswordError("");
 
-    try {
-      const res = await axios.post("http://localhost:8000/api/users/login", {
-        email,
-        password,
-        role
-      });
+  try {
+    const res = await axios.post("http://localhost:8000/api/users/login", {
+      email,
+      password,
+      role,
+    });
 
-      console.log("LOGIN SUCCESS:", res.data);
+    console.log("LOGIN SUCCESS:", JSON.stringify(res.data, null, 2));
 
-      if (res.data.user) {
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-      }
+    // Use the response data directly, no res.data.user
+    login(res.data.token, res.data.role, {
+      _id: res.data._id,
+      name: res.data.name,
+      email: res.data.email,
+      role: res.data.role,
+    });
 
-      login(res.data.token, res.data.role);
+    // Redirect after login
+    navigate(res.data.role === "admin" ? "/admindashboard" : "/userdashboard");
 
-      navigate(res.data.role === "admin" ? "/admindashboard" : "/userdashboard");
-
-    } catch (error) {
-      console.error("Login failed:", error);
-      setPasswordError(
-        error.response?.data?.message || "Login failed, try again"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Login failed:", error);
+    setPasswordError(error.response?.data?.message || "Login failed, try again");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="px-28">

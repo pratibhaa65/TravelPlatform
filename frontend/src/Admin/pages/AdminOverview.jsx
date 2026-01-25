@@ -1,9 +1,10 @@
 import React from "react";
 import Analytics from "./Analytics";
+import { useAuth } from "../../utils/authContext";
 
 const AdminOverview = () => {
-  const userJSON = localStorage.getItem("user");
-  const user = userJSON && userJSON !== "undefined" ? JSON.parse(userJSON) : null;
+  const { auth } = useAuth();
+  const user = auth.user;
 
   return (
     <>
@@ -11,7 +12,7 @@ const AdminOverview = () => {
         <div className="absolute inset-0 bg-[url('/dash.png')] opacity-90 bg-cover bg-center bg-no-repeat"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/40 to-transparent"></div>
 
-        <div className="relative p-16 md:p-20 text-white rounded-3xl bg-gradient-to-rshadow-xl">
+        <div className="relative p-16 md:p-20 text-white rounded-3xl">
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             Welcome back, {user?.name || "Admin"} 👋
           </h2>

@@ -7,34 +7,55 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: false,
     role: null,
     token: null,
-    loading: true,  
+    user: null,
+    loading: true,
   });
 
+  // Load auth from localStorage on page load
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (token && role) {
       setAuth({
         isAuthenticated: true,
         role,
         token,
-        loading: false,  
+        user: storedUser,
+        loading: false,
       });
     } else {
       setAuth((prev) => ({ ...prev, loading: false }));
     }
   }, []);
 
-  const login = (token, role) => {
+  // Login function
+  const login = (token, role, userData) => {
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);
-    setAuth({ isAuthenticated: true, role, token, loading: false });
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    setAuth({
+      isAuthenticated: true,
+      role,
+      token,
+      user: userData,
+      loading: false,
+    });
   };
 
+
+  // Logout
   const logout = () => {
     localStorage.clear();
-    setAuth({ isAuthenticated: false, role: null, token: null, loading: false });
+    setAuth({
+      isAuthenticated: false,
+      role: null,
+      token: null,
+      user: null,
+      loading: false,
+    });
   };
 
   return (
@@ -43,6 +64,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 
 export const useAuth = () => useContext(AuthContext);

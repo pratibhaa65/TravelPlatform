@@ -7,10 +7,8 @@ const Header = () => {
   const location = useLocation();
   const [targetSection, setTargetSection] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const user = Boolean(localStorage.getItem("user"));
-
 
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {

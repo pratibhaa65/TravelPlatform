@@ -1,16 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
-
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    section?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <footer className="bg-gray-50 border-t">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-12">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[minmax(200px,1fr)_minmax(150px,1fr)_minmax(150px,1fr)_minmax(200px,1fr)] gap-8 justify-between">
 
         {/* Brand */}
         <div className="space-y-4">
@@ -22,11 +16,11 @@ const Footer = () => {
         </div>
 
         {/* Follow Us */}
-        <div className="space-y-4 pr-4">
+        <div className="space-y-4">
           <h4 className="text-blue-900 font-bold uppercase tracking-wide">
             Follow Us
           </h4>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-4">
             {[
               { name: "Facebook", img: "/fb.jpg", link: "https://facebook.com" },
               { name: "Twitter", img: "/twitter.png", link: "https://twitter.com" },
@@ -51,33 +45,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Legal */}
-        <div className="space-y-4 pl-6 md:pl-10">
-          <h4 className="text-blue-900 font-semibold uppercase tracking-wide">
-            Legal
-          </h4>
-
-          <ul className="space-y-2 text-sm text-gray-600">
-            <li className="hover:text-blue-600 cursor-pointer">
-              <Link to="/terms">Terms & Conditions</Link>
-            </li>
-            <li className="hover:text-blue-600 cursor-pointer">
-              <Link to="/privacy">Privacy Policy</Link>
-            </li>
-            <li className="hover:text-blue-600 cursor-pointer">
-              <Link to="/cookies">Cookie Policy</Link>
-            </li>
-            <li className="hover:text-blue-600 cursor-pointer">
-              <Link to="/refund-policy">Refund & Cancellation</Link>
-            </li>
-            <li className="hover:text-blue-600 cursor-pointer">
-              <Link to="/disclaimer">Disclaimer</Link>
-            </li>
-          </ul>
-        </div>
-
         {/* Resources */}
-        <div className="space-y-4  pl-8">
+        <div className="space-y-4">
           <h4 className="text-blue-900 font-bold uppercase tracking-wide">
             Resources
           </h4>

@@ -5,19 +5,15 @@ const About = () => {
     return (
         <section id="about" className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-6">
-                <h2 className=" text-center text-4xl font-bold text-gray-900 mb-12">
+                <h2 className=" text-center text-4xl font-bold text-gray-900 mb-8">
                     About Us
                 </h2>
                 <div className="flex flex-col  gap-12 ">
                     <div>
-                        <h3 className="text-2xl  text-gray-900 mb-4">
+                        <h3 className="text-2xl font-semibold text-center text-gray-900 mb-8">
                             We offer top travel features just for you
                         </h3>
-                        <p className="text-black mb-10">
-                            From personalized trip planning and expert travel guidance to fast, secure
-                            reservations and exclusive deals, we take care of every detail so you can
-                            enjoy a smooth, stress-free, and memorable journey.
-                        </p>
+                       
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50">
                                 <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-orange-500 text-white text-xl">

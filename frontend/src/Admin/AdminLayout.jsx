@@ -4,8 +4,8 @@ import AdminHeader from "./components/AdminHeader";
 import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // mobile toggle
+  const [collapsed, setCollapsed] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
 
   return (
     <div className="flex min-h-screen">

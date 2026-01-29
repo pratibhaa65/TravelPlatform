@@ -28,8 +28,8 @@ const Contact = () => {
     <div className="px-28">
       < Header />
       <section
-        id="contact" className="py-12">
-        <div className="min-h-screen flex items-center justify-center">
+        id="contact" className="py-28">
+        <div className=" flex items-center justify-center">
           <div className="w-full max-w-lg bg-gray-50 p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-semibold text-blue-900 mb-6 text-center">
               Contact Us

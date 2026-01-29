@@ -14,9 +14,9 @@ const PublicRoutes = () => {
       <Route
         path="/"
         element={
-          <PublicRoute>
+         
             <LandingPage />
-          </PublicRoute>
+         
         }
       />
       <Route

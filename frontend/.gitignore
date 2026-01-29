@@ -11,6 +11,20 @@ node_modules
 dist
 dist-ssr
 *.local
+build/
+
+# Local config / generated files
+components.json
+jsconfig.json
+
+# shadcn / ui generated
+lib/
+src/components/ui/
+src/components/
+
+# vite/cache
+.vite/
+*.local
 
 # Editor directories and files
 .vscode/*

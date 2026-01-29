@@ -11,7 +11,6 @@ const AddPackage = () => {
   const [availableSlots, setAvailableSlots] = useState("");
   const [imageType, setImageType] = useState("url");
   const [imageUrl, setImageUrl] = useState("");
-  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -168,17 +167,6 @@ const AddPackage = () => {
               />
               Image URL
             </label>
-
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="imageType"
-                value="file"
-                checked={imageType === "file"}
-                onChange={() => setImageType("file")}
-              />
-              Upload Image
-            </label>
           </div>
 
           {/* URL Input */}
@@ -192,15 +180,7 @@ const AddPackage = () => {
             />
           )}
 
-          {/* File Input */}
-          {imageType === "file" && (
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImageFile(e.target.files[0])}
-              className="w-full "
-            />
-          )}
+         
         </div>
 
         {success && (
@@ -223,7 +203,7 @@ const AddPackage = () => {
         </button>
         <Link
           to="/admindashboard/packages"
-            className="text-blue-900 py-2 transition text-center justify-center flex hover:bg-blue-50"
+          className="text-blue-900 py-2 transition text-center justify-center flex hover:bg-blue-50"
 
         >
           View Packages

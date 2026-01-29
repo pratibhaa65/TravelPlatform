@@ -78,7 +78,7 @@ const EditPackage = () => {
 
             setTimeout(() => {
                 navigate("/admindashboard/packages");
-            }, 3000);
+            }, 1000);
 
         } catch (err) {
             console.error(err.response?.data || err.message);
@@ -163,10 +163,10 @@ const EditPackage = () => {
                             <input type="radio" name="imageType" value="url" checked={imageType === "url"} onChange={() => setImageType("url")} />
                             Image URL
                         </label>
-                        <label className="flex items-center gap-2">
+                        {/* <label className="flex items-center gap-2">
                             <input type="radio" name="imageType" value="file" checked={imageType === "file"} onChange={() => setImageType("file")} />
                             Upload Image
-                        </label>
+                        </label> */}
                     </div>
 
                     {imageType === "url" && (
@@ -175,12 +175,12 @@ const EditPackage = () => {
                             {imageUrl && <img src={imageUrl} alt="Preview" className="mt-2 w-40 h-24 object-cover rounded" />}
                         </>
                     )}
-                    {imageType === "file" && (
+                    {/* {imageType === "file" && (
                         <>
                             <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="w-full" />
                             {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Preview" className="mt-2 w-40 h-24 object-cover rounded" />}
                         </>
-                    )}
+                    )} */}
                 </div>
                 {success && <div className="mb-4 rounded bg-green-100 text-green-800 px-4 py-2 text-center">{success}</div>}
                 {error && <div className="mb-4 rounded bg-red-100 text-red-800 px-4 py-2 text-center">{error}</div>}

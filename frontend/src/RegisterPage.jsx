@@ -39,9 +39,9 @@ const RegisterPage = () => {
     localStorage.setItem("user", JSON.stringify(res.data));
 
     if (res.data.role === "admin") {
-      window.location.href = "/admin";
+      window.location.href = "/admindashboard";
     } else {
-      window.location.href = "/user";
+      window.location.href = "/userdashboard";
     }
 
   } catch (error) {
@@ -52,9 +52,9 @@ const RegisterPage = () => {
 };
 
   return (
-    <div className="px-28">
+<div className="flex flex-col h-screen px-28 overflow-hidden">
       < Header />
-    <div className="min-h-screen flex items-center justify-center">
+    <div className=" flex items-center justify-center py-8">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-100 rounded-xl shadow-md overflow-hidden">
         {/* Image side */}
         <div className="hidden md:block md:w-1/2">
@@ -106,10 +106,33 @@ const RegisterPage = () => {
 
             <button
               type="submit"
+
               className="w-full bg-blue-800 text-white py-2 rounded-md hover:bg-blue-700 transition"
             >
               Register
             </button>
+             {/* Divider */}
+              <div className="flex items-center my-6">
+                <div className="flex-grow h-px bg-gray-300"></div>
+                <span className="px-3 text-sm text-gray-500">
+                  Or continue with
+                </span>
+                <div className="flex-grow h-px bg-gray-300"></div>
+              </div>
+
+              <div className="flex justify-center mt-4">
+                <button
+                  type="button"
+                  className="flex items-center justify-center gap-2 border bg-white px-6 py-2 rounded-md hover:bg-gray-50 transition"
+                >
+                  <img
+                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                    alt="Google"
+                    className="w-5 h-5"
+                  />
+                  <span className="text-sm font-medium">Google</span>
+                </button>
+              </div>
 
             <p className="text-center text-sm mt-4">
               Already have an account?{" "}

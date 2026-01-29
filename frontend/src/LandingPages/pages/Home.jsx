@@ -76,7 +76,7 @@ const Home = () => {
     <>
       <section
         id="home"
-        className="py-20 md:py-28 bg-white"
+        className="py-16 md:py-12 bg-white"
       >
 
         <div className=" max-w-7xl mx-auto px-6 ">

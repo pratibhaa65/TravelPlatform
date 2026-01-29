@@ -4,7 +4,7 @@ import UserHeader from "./components/UserHeader";
 import UserSidebar from "./components/UserSidebar";
 
 const UserLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false); // mobile toggle
 
   return (

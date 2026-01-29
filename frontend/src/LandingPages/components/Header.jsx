@@ -1,11 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import UserDropdown from "../../UserDropdown";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [targetSection, setTargetSection] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const user = Boolean(localStorage.getItem("user"));
+
 
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
@@ -77,17 +82,21 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="flex gap-4">
-            <Link to="/login" className="px-4 py-2 border rounded-md">
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-700"
-            >
-              Register
-            </Link>
-          </div>
+          {user ?
+            <UserDropdown/>
+            :
+            <div className="flex gap-4">
+              <Link to="/login" className="px-4 py-2 border rounded-md">
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-700"
+              >
+                Register
+              </Link>
+            </div>
+          }
         </div>
       </div>
 

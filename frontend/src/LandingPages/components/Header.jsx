@@ -9,6 +9,8 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const user = Boolean(localStorage.getItem("user"));
+  const isLoggedIn = user && user !== "undefined";
+
 
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
@@ -46,7 +48,6 @@ const Header = () => {
           DESHTRIP
         </Link>
 
-        {/* Hamburger (Small screens) */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -81,7 +82,7 @@ const Header = () => {
           </div>
 
           {user ?
-            <UserDropdown/>
+            <UserDropdown />
             :
             <div className="flex gap-4">
               <Link to="/login" className="px-4 py-2 border rounded-md">
@@ -142,21 +143,28 @@ const Header = () => {
 
             <hr />
 
-            <Link
-              to="/login"
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-1 border rounded-md text-center"
-            >
-              Login
-            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-3 py-1 border rounded-md text-center"
+                >
+                  Login
+                </Link>
 
-            <Link
-              to="/register"
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-1 bg-blue-900 text-white rounded-md text-center"
-            >
-              Register
-            </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-3 py-1 bg-blue-900 text-white rounded-md text-center"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <UserDropdown />
+            )}
+
           </div>
         </div>
       )}

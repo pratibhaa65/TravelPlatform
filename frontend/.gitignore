@@ -18,9 +18,9 @@ components.json
 jsconfig.json
 
 # shadcn / ui generated
-lib/
-src/components/ui/
-src/components/
+# lib/
+# src/components/ui/
+# src/components/
 
 # vite/cache
 .vite/

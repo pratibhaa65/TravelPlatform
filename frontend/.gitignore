@@ -14,8 +14,8 @@ dist-ssr
 build/
 
 # Local config / generated files
-components.json
-jsconfig.json
+# components.json
+# jsconfig.json
 
 # shadcn / ui generated
 # lib/

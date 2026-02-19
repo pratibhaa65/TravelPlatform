@@ -54,8 +54,8 @@ const Home = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8000/api/packages");
-        setPackages(data);
+        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/packages`);
+        setPackages(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching packages:", error);
       }
@@ -248,7 +248,7 @@ const Home = () => {
         </div>
 
         <div className="flex gap-6 overflow-x-auto pb-4 scroll-smooth">
-          {packages.map(pkg => (
+          {(packages || []).map(pkg => (
             <div key={pkg._id} className="min-w-[300px]">
               <PackageCard
                 pkg={pkg}

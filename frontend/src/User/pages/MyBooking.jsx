@@ -15,10 +15,10 @@ const MyBooking = () => {
   const fetchBookings = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/bookings/mybookings",
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/mybookings`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setBookings(res.data || []);
+      setBookings(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Error fetching bookings", err);
     } finally {
@@ -43,7 +43,7 @@ const MyBooking = () => {
   const confirmCancelBooking = async () => {
     try {
       await axios.delete(
-        `http://localhost:8000/api/bookings/cancel/${selectedBooking}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/cancel/${selectedBooking}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -94,7 +94,7 @@ const MyBooking = () => {
                 </td>
               </tr>
             ) : (
-              bookings.map((b) => (
+              (bookings || []).map((b) => (
                 <tr key={b._id} className="border-t hover:bg-gray-50">
                   <td className="py-3 px-4">{b.package?.title}</td>
 

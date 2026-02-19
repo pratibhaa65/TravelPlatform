@@ -30,24 +30,36 @@ const RegisterPage = () => {
       name: fullName,
       email,
       password,
-      role,
+      role: role || "user",
     });
 
-    console.log("REGISTER SUCCESS:", res.data);
+    const data = res?.data;
+    if (!data?.token) {
+      setPasswordError(data?.message || "Registration failed");
+      return;
+    }
 
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data));
+    const roleValue = data.role || "user";
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", roleValue);
+    localStorage.setItem("user", JSON.stringify({
+      _id: data._id,
+      name: data.name,
+      email: data.email,
+      role: roleValue,
+    }));
 
-    if (res.data.role === "admin") {
+    if (roleValue === "admin") {
       window.location.href = "/admindashboard";
     } else {
       window.location.href = "/userdashboard";
     }
-
   } catch (error) {
-    setPasswordError(
-      error.response?.data?.message || "Registration failed"
-    );
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Registration failed";
+    setPasswordError(message);
   }
 };
 

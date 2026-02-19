@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSuitcase, FaCalendarCheck, FaMoneyBillWave } from "react-icons/fa";
 import PackageDetailsModal from "../components/PackageDetailsModal";
@@ -34,9 +34,6 @@ const UserOverview = () => {
   const user = auth.user;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  console.log("Logged in user:", user);
-
-
   const [stats, setStats] = useState({
     totalBookings: 0,
     upcomingTrips: 0,
@@ -50,11 +47,8 @@ const UserOverview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const bookingsRes = await axios.get("/api/bookings/mybookings", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        const bookings = bookingsRes.data || [];
+        const bookingsRes = await API.get("/bookings/mybookings");
+        const bookings = Array.isArray(bookingsRes.data) ? bookingsRes.data : [];
 
         setRecentBookings(bookings.slice(0, 5));
 
@@ -66,11 +60,13 @@ const UserOverview = () => {
             .reduce((sum, b) => sum + (b.totalPrice || 0), 0),
         });
 
-        const packagesRes = await axios.get("/api/packages");
-        setPackages(packagesRes.data.slice(0, 3));
+        const packagesRes = await API.get("/packages");
+        const packagesList = Array.isArray(packagesRes.data) ? packagesRes.data : [];
+        setPackages(packagesList.slice(0, 3));
 
       } catch (err) {
         console.error("Dashboard data error:", err);
+        setRecentBookings([]);
       }
     };
 
@@ -144,7 +140,7 @@ const UserOverview = () => {
                     </td>
                   </tr>
                 ) : (
-                  recentBookings.map((b) => (
+                  (recentBookings || []).map((b) => (
                     <tr key={b._id} className="border-b bg-gray-50 hover:bg-white">
                       <td className="py-2 px-4">
                         {b.package?.title || "No package"}
@@ -192,13 +188,13 @@ const UserOverview = () => {
           className={`flex gap-6 overflow-x-auto pb-4 scroll-smooth transition ${selectedPackage ? "opacity-40 pointer-events-none" : ""
             }`}
         >
-          {packages.length === 0 ? (
+          {(packages || []).length === 0 ? (
             <div className="min-w-full text-center text-gray-500 py-10">
               <p className="text-lg font-medium">No packages available</p>
               <p className="text-sm mt-1">Please check back later ✈️</p>
             </div>
           ) : (
-            packages.map(pkg => (
+            (packages || []).map(pkg => (
               <div key={pkg._id}
                 className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-[45%] lg:w-[30%] bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <div className="relative">

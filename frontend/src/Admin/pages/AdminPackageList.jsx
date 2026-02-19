@@ -23,11 +23,11 @@ const AdminPackageList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/packages", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/packages`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => setPackages(res.data))
-      .catch((err) => console.error(err))
+      .then((res) => setPackages(Array.isArray(res.data) ? res.data : []))
+      .catch(() => setPackages([]))
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -36,7 +36,7 @@ const AdminPackageList = () => {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:8000/api/packages/${packageToDelete}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/packages/${packageToDelete}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -83,7 +83,7 @@ const AdminPackageList = () => {
           </thead>
 
           <tbody>
-            {packages.map((pkg) => (
+            {(packages || []).map((pkg) => (
               <tr
                 key={pkg._id}
                 className="border-b bg-gray-100 hover:bg-white transition"

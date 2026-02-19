@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import {
   PieChart, Pie, Cell, Tooltip, Legend,
@@ -23,37 +23,22 @@ const Analytics = () => {
   const [packages, setPackages] = useState([]);
   const [lineData, setLineData] = useState([]);
 
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const statsRes = await axios.get(
-          "http://localhost:8000/api/admin/analytics",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const statsRes = await API.get("/admin/analytics");
         setStats(statsRes.data);
 
-        const bookingsRes = await axios.get(
-          "http://localhost:8000/api/admin/bookings?limit=3",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const bookingsRes = await API.get("/admin/bookings", { params: { limit: 3 } });
+        setBookings(Array.isArray(bookingsRes.data) ? bookingsRes.data : []);
 
-        console.log("Bookings API response:", bookingsRes.data);
-        setBookings(bookingsRes.data);
+        const packagesRes = await API.get("/admin/packages", { params: { limit: 3 } });
+        setPackages(Array.isArray(packagesRes.data) ? packagesRes.data : []);
 
-        const packagesRes = await axios.get(
-          "http://localhost:8000/api/admin/packages?limit=3",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setPackages(packagesRes.data);
-
-        const lineRes = await axios.get(
-          "http://localhost:8000/api/admin/bookingspermonth",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setLineData(lineRes.data);
+        const lineRes = await API.get("/admin/bookingspermonth");
+        setLineData(Array.isArray(lineRes.data) ? lineRes.data : []);
 
       } catch (error) {
         console.error("Error fetching analytics:", error);
@@ -72,7 +57,7 @@ const Analytics = () => {
     };
 
     fetchAnalytics();
-  }, [token]);
+  }, []);
 
 
   if (!stats) return null;

@@ -39,7 +39,7 @@ const AddPackage = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:8000/api/packages",
+        `${import.meta.env.VITE_BACKEND_URL}/api/packages`,
         payload,
         {
           headers: {

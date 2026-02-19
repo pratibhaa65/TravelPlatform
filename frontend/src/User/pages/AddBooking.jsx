@@ -33,7 +33,7 @@ const AddBooking = () => {
 
     try {
       await axios.post(
-        "http://localhost:8000/api/bookings",
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings`,
         {
           packageId: selectedPackage._id,
           bookingDate,

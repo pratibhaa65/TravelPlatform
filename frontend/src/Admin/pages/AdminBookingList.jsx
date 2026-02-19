@@ -13,9 +13,9 @@ const AdminBookingList = () => {
   // FETCH BOOKINGS
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/bookings", { headers })
-      .then((res) => setBookings(res.data))
-      .catch((err) => console.error(err))
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/bookings`, { headers })
+      .then((res) => setBookings(Array.isArray(res.data) ? res.data : []))
+      .catch(() => setBookings([]))
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -23,7 +23,7 @@ const AdminBookingList = () => {
   const markPaymentPaid = async (id) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/bookings/${id}/payment/paid`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}/payment/paid`,
         {},
         { headers }
       );
@@ -42,7 +42,7 @@ const AdminBookingList = () => {
   const markRefunded = async (id) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/bookings/${id}/payment/refund`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}/payment/refund`,
         {},
         { headers }
       );
@@ -61,7 +61,7 @@ const AdminBookingList = () => {
   const confirmBooking = async (id) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/bookings/${id}/confirm`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}/confirm`,
         {},
         { headers }
       );
@@ -82,7 +82,7 @@ const AdminBookingList = () => {
 
     try {
       await axios.put(
-        `http://localhost:8000/api/bookings/${id}/cancel`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}/cancel`,
         {},
         { headers }
       );
@@ -107,10 +107,9 @@ const AdminBookingList = () => {
   };
 
 const updateBookingField = async (id, field, value) => {
-  console.log("Updating booking:", id, field, value);
   try {
     await axios.put(
-      `http://localhost:8000/api/bookings/${id}/update`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}/update`,
       { [field]: value },
       { headers }
     );
@@ -146,7 +145,7 @@ const updateBookingField = async (id, field, value) => {
           </thead>
 
           <tbody>
-            {bookings.map((booking) => (
+            {(bookings || []).map((booking) => (
               <tr key={booking._id} className="border-b bg-gray-100 hover:bg-white">
                 <td className="py-3 px-4 text-center">
                   <div className="font-medium">{booking.user?.name}</div>

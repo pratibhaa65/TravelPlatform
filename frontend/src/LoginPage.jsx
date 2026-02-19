@@ -33,15 +33,12 @@ const LoginPage = () => {
     setPasswordError("");
 
     try {
-      const res = await axios.post("http://localhost:8000/api/users/login", {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
         email,
         password,
         role,
       });
 
-      console.log("LOGIN SUCCESS:", JSON.stringify(res.data, null, 2));
-
-      // Use the response data directly, no res.data.user
       login(res.data.token, res.data.role, {
         _id: res.data._id,
         name: res.data.name,

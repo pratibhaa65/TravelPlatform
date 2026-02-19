@@ -14,8 +14,12 @@ export const AuthProvider = ({ children }) => {
   // Load auth from localStorage on page load
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    let role = localStorage.getItem("role");
+    const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+    if (!role && storedUser?.role) {
+      role = storedUser.role;
+      localStorage.setItem("role", role);
+    }
 
     if (token && role) {
       setAuth({

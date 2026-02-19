@@ -26,7 +26,7 @@
 - User, Package, Booking, Admin (users, packages, bookings, analytics)
 
 **Routes:**
-- `/api/users`, `/api/packages`, `/api/bookings`, `/api/payments`, `/api/admin`
+- `/api/users`, `/packages`, `/api/bookings`, `/api/payments`, `/api/admin`
 
 **Middleware:**
 - `authMiddleware`, `adminMiddleware`

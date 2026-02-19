@@ -7,15 +7,16 @@ const AdminUsersList = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/users/admin/users", {
+            .get(`${import.meta.env.VITE_BACKEND_URL}/api/users/admin/users`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
-            .then((res) => setUsers(res.data))
-            .catch((err) => console.error(err));
+            .then((res) => setUsers(Array.isArray(res.data) ? res.data : []))
+            .catch(() => setUsers([]));
     }, [token]);
 
-    const normalUsers = users.filter((u) => u.role === "user");
-    const admins = users.filter((u) => u.role === "admin");
+    const userList = Array.isArray(users) ? users : [];
+    const normalUsers = userList.filter((u) => u.role === "user");
+    const admins = userList.filter((u) => u.role === "admin");
 
     const Table = ({ title, data }) => (
         <div className="mb-12">

@@ -10,8 +10,12 @@ const UserPackages = () => {
 
   useEffect(() => {
     const fetchPackages = async () => {
-      const res = await axios.get("http://localhost:8000/api/packages");
-      setPackages(res.data);
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/packages`);
+        setPackages(Array.isArray(res.data) ? res.data : []);
+      } catch {
+        setPackages([]);
+      }
     };
     fetchPackages();
   }, []);
@@ -26,7 +30,7 @@ const UserPackages = () => {
           selectedPackage ? "opacity-40 pointer-events-none" : ""
         }`}
       >
-        {packages.map((pkg) => (
+        {(packages || []).map((pkg) => (
           <div
             key={pkg._id}
             className="bg-white rounded-xl shadow hover:shadow-lg transition relative"

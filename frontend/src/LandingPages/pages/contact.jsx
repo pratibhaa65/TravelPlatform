@@ -14,8 +14,6 @@ const Contact = () => {
   const handleContact = (e) => {
     e.preventDefault();
 
-    console.log({ name, email, message });
-
     setSuccess(true);
     setName("");
     setEmail("");
@@ -35,11 +33,6 @@ const Contact = () => {
               Contact Us
             </h2>
 
-            {success && (
-              <p className="mb-4 text-green-600 text-center font-medium">
-                Message sent successfully!
-              </p>
-            )}
             {success && (
               <p className="mb-4 text-green-600 text-center font-medium">
                 Message sent successfully!

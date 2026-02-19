@@ -21,7 +21,7 @@ const EditPackage = () => {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/packages/${id}`)
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/packages/${id}`)
             .then(res => {
                 setTitle(res.data.title);
                 setDescription(res.data.description);
@@ -64,7 +64,7 @@ const EditPackage = () => {
             }
 
             await axios.put(
-                `http://localhost:8000/api/packages/${id}`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/packages/${id}`,
                 formData,
                 {
                     headers: {

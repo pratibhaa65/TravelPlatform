@@ -16,8 +16,8 @@ const Packages = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const res = await axios.get("/api/packages");
-        setPackages(res.data);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/packages`);
+        setPackages(Array.isArray(res.data) ? res.data : []);
       } catch (error) {
         console.error("Failed to fetch packages", error);
       }
@@ -51,7 +51,7 @@ const Packages = () => {
       <h1 className="text-3xl font-bold mb-8">Available Packages</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {packages.map((pkg) => (
+        {(packages || []).map((pkg) => (
           <PackageCard
             key={pkg._id}
             pkg={pkg}

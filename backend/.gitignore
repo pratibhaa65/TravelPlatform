@@ -7,23 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-build/
-
 # Environment variables
 .env
 .env.local
 .env.*.local
 
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
 
-# vite/cache
-.vite/
-*.local
-
-# Editor directories and files
+# IDE
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -34,4 +28,6 @@ build/
 *.sln
 *.sw?
 
-.env
+# OS
+.DS_Store
+Thumbs.db

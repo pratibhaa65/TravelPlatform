@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PackageCard from "../components/PackageCard";
 import PackageDetailsModal from "../components/PackageDetailsModal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Packages = () => {
@@ -31,9 +31,9 @@ const Packages = () => {
       toast.error(
         <span>
           Please{" "}
-          <a href="/login" className="underline font-semibold">
+          <Link to="/login" className="underline font-semibold">
             login
-          </a>{" "}
+          </Link>{" "}
           to book this package
         </span>,
         { duration: 3000 }

@@ -135,9 +135,6 @@ const LoginPage = () => {
                   Register Now
                 </Link>
               </p>
-
-
-
             </form>
           </div>
         </div>

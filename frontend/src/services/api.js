@@ -5,6 +5,7 @@ const baseURL = (typeof raw === "string" ? raw.trim() : "") || "http://localhost
 const API = axios.create({
   baseURL: `${baseURL}/api`,
 });
+console.log("BASE URL:", baseURL);
 
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");

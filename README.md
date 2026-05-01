@@ -41,9 +41,8 @@
 
 1. **User Registration/Login**
 2. **Package Booking**
-3. **Payment Verification (Khalti)**
-4. **Admin Analytics & Management**
-5. **Cancellation & Refund Handling**
+3. **Admin Analytics & Management**
+4. **Cancellation & Refund Handling**
 
 ## Installation
 
